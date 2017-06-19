@@ -20,10 +20,6 @@ namespace Plugin.Logs.Writer
 		/// </summary>
 		protected readonly string _fileName;
 
-		/// <summary>
-		/// The application version
-		/// </summary>
-		protected readonly string _appVersion;
 		#endregion
 
 		/// <summary>
@@ -31,13 +27,10 @@ namespace Plugin.Logs.Writer
 		/// </summary>
 		/// <param name="fileName">Name of the file.</param>
 		/// <param name="logDirectoryPath">The log directory path.</param>
-		/// <param name="appVersion">The application version.</param>
 		public BaseLogWriterService(
 			string fileName,
-			string logDirectoryPath,
-			string appVersion)
+			string logDirectoryPath)
 		{
-			_appVersion = appVersion;
 			_fileName = fileName;
 			_logDirectoryPath = logDirectoryPath;
 		}
@@ -77,7 +70,7 @@ namespace Plugin.Logs.Writer
             string level = dataToLog.Level.ToString().ToUpperInvariant().PadRight(11);
 
             var dateStr = dataToLog.When.ToString("yyyy-MM-dd HH:mm:ss");
-            string toWrite = $"{dateStr};{_appVersion};{level};\"{dataToLog.Data}\"";
+            string toWrite = $"{dateStr};{level};\"{dataToLog.Data}\"";
             return toWrite;
         }
 
