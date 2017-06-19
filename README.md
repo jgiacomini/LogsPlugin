@@ -1,10 +1,12 @@
 # LogsPlugin
 Plugin to logs on all  .Net platforms.  
 ```cs
-using LLibrary;
+using Plugin.Logs;
 
-L.Register("INFO");
-L.Register("ERROR", "An exception just happened: {0}");
+var logService = new LogService("log","C:\logs\");
+
+logService("Message");
+logService.log(new NotImplementedException());
 ```
 
 
