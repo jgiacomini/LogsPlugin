@@ -11,11 +11,6 @@ namespace Plugin.Logs
 	public abstract class BaseLogService : ILogService
 	{
 		/// <summary>
-		/// The logger
-		/// </summary>
-		private readonly ThreadLogger _threadLogger;
-
-		/// <summary>
 		/// The log writer
 		/// </summary>
 		private readonly ILogWriterService _logWriter;
@@ -59,41 +54,38 @@ namespace Plugin.Logs
 
 			_logWriter = logWriter;
 
-			_threadLogger = new ThreadLogger(logWriter);
-			_threadLogger.Start();
-
-			logWriter.PurgeOldDaysAsync(NbDaysToKeep);
+			logWriter.PurgeOldDaysAsync(NbDaysToKeep).ConfigureAwait(false);
 		}
 
 		/// <inheritdoc />
 		public void Log(string message, LogLevel logLevel = LogLevel.Information)
 		{
-			_threadLogger.AddDataToLog(message, logLevel);
+			ThreadLogger.Instance.AddDataToLog(message, logLevel, _logWriter);
 		}
 
 		/// <inheritdoc />
 		public void Log(Exception exception, LogLevel logLevel = LogLevel.Error)
 		{
-			_threadLogger.AddDataToLog(exception.CreateExceptionString(), logLevel);
+            ThreadLogger.Instance.AddDataToLog(exception.CreateExceptionString(), logLevel, _logWriter);
 		}
 
 		/// <inheritdoc />
 		public System.Threading.Tasks.Task FlushAsync()
 		{
-			return _threadLogger.FlushAsync();
+			return ThreadLogger.Instance.FlushAsync();
 		}
 
 		/// <inheritdoc />
 		public System.Threading.Tasks.Task PurgeOldDaysAsync()
 		{
-			return _logWriter.PurgeOldDaysAsync(NbDaysToKeep);
+            return _logWriter.PurgeOldDaysAsync(NbDaysToKeep);
 		}
 
 		/// <inheritdoc />
 		public void Dispose()
 		{
 			_logWriter.Dispose();
-			_threadLogger.Dispose();
+            ThreadLogger.Instance.Dispose();
 		}
 	}
 }

@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -30,9 +30,11 @@
     <Reference Include="System" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="..\Plugin.Logs.iOSUnified\Writer\LogWriterService.cs">
+      <Link>Writer\LogWriterService.cs</Link>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="LogService.cs" />
-    <Compile Include="Writer\LogWriterService.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Plugin.Logs.Abstraction\Plugin.Logs.Abstraction.csproj">
@@ -40,8 +42,6 @@
       <Name>Plugin.Logs.Abstraction</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Writer\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Plugin.Logs.Writer;
+using System;
 namespace Plugin.Logs.Model
 {
 	/// <summary>
@@ -6,12 +7,13 @@ namespace Plugin.Logs.Model
 	/// </summary>
     public class DataToLog
 	{
-		/// <summary>
-		/// Initializes a new instance of the <see cref="DataToLog"/> class.
-		/// </summary>
-		/// <param name="data">The data.</param>
-		/// <param name="logLevel">The log level.</param>
-		public DataToLog(string data, LogLevel logLevel = LogLevel.Information)
+        /// <summary>
+        /// Initializes a new instance of the <see cref="DataToLog"/> class.
+        /// </summary>
+        /// <param name="data">The data.</param>
+        /// <param name="logLevel">The log level.</param>
+        /// <param name="logWritterService">The log writter service.</param>
+        public DataToLog(string data, LogLevel logLevel, ILogWriterService logWritterService)
 		{
 			Data = data;
 			When = DateTime.Now;
@@ -35,5 +37,13 @@ namespace Plugin.Logs.Model
 		/// Level of the log
 		/// </summary>
 		public LogLevel Level { get; set; }
-	}
+
+        /// <summary>
+        /// Gets the log writter service.
+        /// </summary>
+        /// <value>
+        /// The log writter service.
+        /// </value>
+        public ILogWriterService LogWritterService { get; private set; }
+    }
 }

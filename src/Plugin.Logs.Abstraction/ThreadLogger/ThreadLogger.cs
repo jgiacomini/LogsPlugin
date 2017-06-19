@@ -1,30 +1,33 @@
-﻿using System;
+﻿using Plugin.Logs.Model;
+using Plugin.Logs.Writer;
+using System;
 using System.Collections.Concurrent;
 using System.Diagnostics;
-using System.Threading;
 using System.Threading.Tasks;
-using Plugin.Logs.Extension;
-using Plugin.Logs.Model;
-using Plugin.Logs.Writer;
 
 namespace Plugin.Logs
 {
-	/// <summary>
-	/// Manage the main loop to log data
-	/// </summary>
-	/// <seealso cref="System.IDisposable" />
+    /// <summary>
+    /// Manage the main loop to log data
+    /// </summary>
+    /// <seealso cref="System.IDisposable" />
     internal class ThreadLogger : IDisposable
 	{
-		#region Fields
-		/// <summary>
-		/// The log writer
-		/// </summary>
-		private readonly ILogWriterService _logWriter;
+        #region Fields
+        /// <summary>
+        /// The instance
+        /// </summary>
+        private static volatile ThreadLogger _instance;
 
-		/// <summary>
-		/// The is alive
-		/// </summary>
-		private bool _isAlive = true;
+        /// <summary>
+        /// The synchronize root
+        /// </summary>
+        private static object _syncRoot = new Object();
+
+        /// <summary>
+        /// The is alive
+        /// </summary>
+        private bool _isAlive = true;
 
 		/// <summary>
 		/// The _queued
@@ -35,22 +38,33 @@ namespace Plugin.Logs
 		/// <summary>
 		/// Initializes a new instance of the <see cref="ThreadLogger"/> class.
 		/// </summary>
-		/// <param name="logWriter">The log writer.</param>
-		public ThreadLogger(ILogWriterService logWriter)
-		{
-			if (logWriter == null)
-			{
-				throw new ArgumentNullException("logWriter");
-			}
+        private ThreadLogger()
+        {
+            Start();
+        }
 
-			_logWriter = logWriter;
-			Start();
-		}
+        public static ThreadLogger Instance
+        {
+            get
+            {
+                if (_instance == null)
+                {
+                    lock (_syncRoot)
+                    {
+                        if (_instance == null)
+                            _instance = new ThreadLogger();
+                    }
+                }
 
-		/// <summary>
-		/// Launches this instance.
-		/// </summary>
-		public void Start()
+                return _instance;
+            }
+        }
+
+
+        /// <summary>
+        /// Launches this instance.
+        /// </summary>
+        public void Start()
 		{
 			Task.Run(() =>
 			{
@@ -97,7 +111,7 @@ namespace Plugin.Logs
 					DataToLog dataToLog;
 					if (_queued.TryDequeue(out dataToLog))
 					{
-						await _logWriter.WriteLogAsync(dataToLog);
+                        await dataToLog.LogWritterService.WriteLogAsync(dataToLog);
 					}
 				}
 			}
@@ -107,14 +121,15 @@ namespace Plugin.Logs
 			}
 		}
 
-		/// <summary>
-		/// Adds the data to log.
-		/// </summary>
-		/// <param name="data">The data.</param>
-		/// <param name="logLevel">level of the log</param>
-		public void AddDataToLog(string data, LogLevel logLevel)
+        /// <summary>
+        /// Adds the data to log.
+        /// </summary>
+        /// <param name="data">The data.</param>
+        /// <param name="logLevel">The log level.</param>
+        /// <param name="logWritterService">The log writter service.</param>
+        public void AddDataToLog(string data, LogLevel logLevel, ILogWriterService logWritterService)
 		{
-			var dataToLog = new DataToLog(data, logLevel);
+			var dataToLog = new DataToLog(data, logLevel, logWritterService);
 			_queued.Enqueue(dataToLog);
 		}
 
@@ -122,7 +137,6 @@ namespace Plugin.Logs
 		public void Dispose()
 		{
 			_isAlive = false;
-			_logWriter.Dispose();
 		}
 	}
 }
