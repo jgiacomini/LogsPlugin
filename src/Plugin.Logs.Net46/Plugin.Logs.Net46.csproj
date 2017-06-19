@@ -5,7 +5,7 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{DAFB4732-6806-4DF0-B588-8CA23B2A53C0}</ProjectGuid>
     <OutputType>Library</OutputType>
-    <RootNamespace>Plugin.Logs.Net46</RootNamespace>
+    <RootNamespace>Plugin.Logs</RootNamespace>
     <AssemblyName>Plugin.Logs.Net46</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
   </PropertyGroup>

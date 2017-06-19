@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Concurrent;
 using System.Diagnostics;
+using System.Threading;
 using System.Threading.Tasks;
+using Plugin.Logs.Extension;
 using Plugin.Logs.Model;
 using Plugin.Logs.Writer;
 

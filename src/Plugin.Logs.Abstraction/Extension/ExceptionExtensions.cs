@@ -5,7 +5,7 @@ namespace Plugin.Logs.Extension
 	/// <summary>
 	/// Add some method to exception
 	/// </summary>
-	public static class ExceptionExtension
+	public static class ExceptionExtensions
 	{
 		/// <summary>
 		/// Creates the exception string.

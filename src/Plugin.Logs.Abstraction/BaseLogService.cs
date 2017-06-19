@@ -51,6 +51,7 @@ namespace Plugin.Logs
 		public BaseLogService(ILogWriterService logWriter, uint nbDaysToKeep)
 		{
 			NbDaysToKeep = nbDaysToKeep;
+
 			if (logWriter == null)
 			{
 				throw new ArgumentNullException("logWriter");
