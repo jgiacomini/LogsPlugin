@@ -5,4 +5,4 @@ Can be used in :
 Xamarin iOS 
 Xamarin Android
 .Net Core
-.Net 4.5
+.Net 4.6
