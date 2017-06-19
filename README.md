@@ -1,5 +1,13 @@
 # LogsPlugin
 Plugin to logs on all  .Net platforms.  
+```cs
+using LLibrary;
+
+L.Register("INFO");
+L.Register("ERROR", "An exception just happened: {0}");
+```
+
+
 
 [![Build status](https://ci.appveyor.com/api/projects/status/6b5nojsd4ex6gk70?svg=true)](https://ci.appveyor.com/project/jgiacomini/logsplugin)
 
