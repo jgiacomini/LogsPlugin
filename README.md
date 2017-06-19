@@ -1,5 +1,5 @@
 # LogsPlugin
-Plugin to logs on all  .Net platforms.  
+Plugin to logs on .Net platforms.  
 ```cs
 using Plugin.Logs;
 
