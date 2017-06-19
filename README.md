@@ -5,8 +5,8 @@ using Plugin.Logs;
 
 var logService = new LogService("log","C:\logs\");
 
-logService("Message");
-logService.log(new NotImplementedException());
+logService.Log("Message");
+logService.Log(new NotImplementedException());
 ```
 
 
