@@ -1,9 +1,7 @@
-﻿using System;
+﻿﻿﻿using System;
 using System.Diagnostics;
 using System.IO;
-using System.Threading;
 using System.Threading.Tasks;
-using Plugin.Logs.Extension;
 using Plugin.Logs.Model;
 
 namespace Plugin.Logs.Writer
@@ -51,7 +49,7 @@ namespace Plugin.Logs.Writer
             if (dataToLog.Level == LogLevel.Critical || dataToLog.Level == LogLevel.Error)
             {
                 logType = "error";
-                logFilePath = $"{today.ToString("yyyy-MM")}\\{_fileName}_{logType}_{today.ToString("yyyy-MM-dd")}.csv";
+                logFilePath = Path.Combine($"{today.ToString("yyyy-MM")}",$"{_fileName}_{logType}_{today.ToString("yyyy-MM-dd")}.csv");
                 await WriteInFileAsync(Path.Combine(_logDirectoryPath, logFilePath), dataToLog);
             }
         }

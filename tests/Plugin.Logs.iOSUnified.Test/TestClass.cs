@@ -27,18 +27,16 @@ namespace Plugin.Logs.iOSUnified.Test
         {
 			var directoryPath = GetRandomDirectoryPath("Infos");
 
-			var filePrefix = FILE_PREFIX + "_LogInfo";
+			var filePrefix = FILE_PREFIX + "LogInfo";
             using (var logService = new LogService(filePrefix, directoryPath))
             {
                 Debug.WriteLine(directoryPath);
-
                 logService.Log("log information test", LogLevel.Information);
 
                 await logService.FlushAsync();
                 var today = DateTime.Now;
 
-                var fileName = Path.Combine(directoryPath, $"{today.ToString("yyyy-MM")}\\{filePrefix}_log_{today.ToString("yyyy-MM-dd")}.csv");
-
+                var fileName = Path.Combine(directoryPath, $"{today.ToString("yyyy-MM")}{Path.DirectorySeparatorChar}{filePrefix}_log_{today.ToString("yyyy-MM-dd")}.csv");
 				Assert.IsTrue(File.Exists(fileName), $"File doesn't exist {fileName}");
             }
         }
@@ -56,7 +54,7 @@ namespace Plugin.Logs.iOSUnified.Test
                 logService.Log("log information test", LogLevel.Information);
                 await logService.FlushAsync();
                 var today = DateTime.Today;
-                var fileName = Path.Combine(directoryPath, $"{today.ToString("yyyy-MM")}\\{filePrefix}_log_{today.ToString("yyyy-MM-dd")}.csv");
+                var fileName = Path.Combine(directoryPath, Path.Combine($"{today.ToString("yyyy-MM")}",$"{filePrefix}_log_{today.ToString("yyyy-MM-dd")}.csv"));
                 Assert.IsTrue(File.Exists(fileName), $"File doesn't exist {fileName}");
             }
         }
@@ -94,7 +92,7 @@ namespace Plugin.Logs.iOSUnified.Test
 
                 await logService.FlushAsync().ConfigureAwait(false);
 				var today = DateTime.Today;
-				var fileName = Path.Combine(directoryPath, $"{today.ToString("yyyy-MM")}\\{filePrefix}_log_{today.ToString("yyyy-MM-dd")}.csv");
+                        var fileName = Path.Combine(directoryPath, $"{today.ToString("yyyy-MM")}{Path.DirectorySeparatorChar}{filePrefix}_log_{today.ToString("yyyy-MM-dd")}.csv");
 				Assert.IsTrue(File.Exists(fileName), $"File doesn't exist {fileName}");
 			}
 		}
@@ -111,8 +109,8 @@ namespace Plugin.Logs.iOSUnified.Test
                 logService.Log(new ArgumentNullException("log error test", inner), LogLevel.Error);
 				await logService.FlushAsync();
 				var today = DateTime.Now;
-                Assert.IsTrue(File.Exists(Path.Combine(directoryPath, $"{today.ToString("yyyy-MM")}\\{filePrefix}_log_{today.ToString("yyyy-MM-dd")}.csv")));
-                Assert.IsTrue(File.Exists(Path.Combine(directoryPath, $"{today.ToString("yyyy-MM")}\\{filePrefix}_error_{today.ToString("yyyy-MM-dd")}.csv")));
+                        Assert.IsTrue(File.Exists(Path.Combine(directoryPath, $"{today.ToString("yyyy-MM")}{Path.DirectorySeparatorChar}{filePrefix}_log_{today.ToString("yyyy-MM-dd")}.csv")));
+                        Assert.IsTrue(File.Exists(Path.Combine(directoryPath, $"{today.ToString("yyyy-MM")}{Path.DirectorySeparatorChar}{filePrefix}_error_{today.ToString("yyyy-MM-dd")}.csv")));
             }
         }
 
