@@ -1,14 +1,16 @@
-﻿using System;
+﻿using Plugin.Logs.Model;
+using System;
 using System.Diagnostics;
 using System.IO;
-using System.Threading;
 using System.Threading.Tasks;
-using Plugin.Logs.Extension;
-using Plugin.Logs.Model;
 
 namespace Plugin.Logs.Writer
 {
-	public abstract class BaseLogWriterService : ILogWriterService
+    /// <summary>
+    /// Base log writer
+    /// </summary>
+    /// <seealso cref="Plugin.Logs.Writer.ILogWriterService" />
+    public abstract class BaseLogWriterService : ILogWriterService
 	{
 		#region Fields
 
@@ -161,27 +163,27 @@ namespace Plugin.Logs.Writer
 		protected abstract void DeleteFile(string file);
 
         /// <summary>
-        /// Right the specified sValue and iMaxLength.
+        /// Rights the specified value.
         /// </summary>
-        /// <returns>The right.</returns>
-        /// <param name="sValue">S value.</param>
-        /// <param name="iMaxLength">I max length.</param>
-		public string Right(string sValue, int iMaxLength)
+        /// <param name="value">The value.</param>
+        /// <param name="maxLength">The maximum length.</param>
+        /// <returns>return the right of the string</returns>
+        public string Right(string value, int maxLength)
 		{
 			//Check if the value is valid
-			if (string.IsNullOrEmpty(sValue))
+			if (string.IsNullOrEmpty(value))
 			{
-				//Set valid empty string as string could be null
-				sValue = string.Empty;
+                //Set valid empty string as string could be null
+                value = string.Empty;
 			}
-			else if (sValue.Length > iMaxLength)
+			else if (value.Length > maxLength)
 			{
-				//Make the string no longer than the max length
-				sValue = sValue.Substring(sValue.Length - iMaxLength, iMaxLength);
+                //Make the string no longer than the max length
+                value = value.Substring(value.Length - maxLength, maxLength);
 			}
 
 			//Return the string
-			return sValue;
+			return value;
 		}
 
 		/// <inheritdoc />
