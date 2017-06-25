@@ -1,4 +1,4 @@
-﻿using System;
+﻿﻿using System;
 using System.Diagnostics;
 using System.IO;
 using System.Text;
@@ -167,11 +167,11 @@ namespace Plugin.Logs.iOSUnified.Test
                     var fileExist = File.Exists(filePath);
                     if (currentDay >= minDate)
                     {
-                        Assert.IsTrue(fileExist, $"Le fichier n'aurait pas du être supprimé : {filePath}");
+                        Assert.IsTrue(fileExist, $"The file would not have to be deleted : {filePath}");
                     }
                     else
                     {
-                        Assert.IsFalse(fileExist, $"Le fichier aurait du être supprimé : {filePath}");
+                        Assert.IsFalse(fileExist, $"The file should have been deleted : {filePath}");
                     }
                 }
             }
