@@ -18,6 +18,7 @@ namespace Plugin.Logs.Model
 			Data = data;
 			When = DateTime.Now;
 			Level = logLevel;
+            LogWritterService = logWritterService;
 		}
 
 		/// <summary>
