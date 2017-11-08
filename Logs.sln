@@ -2,7 +2,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.27004.2005
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Plugin.Logs.Abstraction", "src\Plugin.Logs.Abstraction\Plugin.Logs.Abstraction.csproj", "{3987C3AE-DD46-4692-BE1B-F376E210EF95}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Plugin.Logs.Abstraction", "src\Plugin.Logs.Abstraction\Plugin.Logs.Abstraction.csproj", "{3987C3AE-DD46-4692-BE1B-F376E210EF95}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Plugin.Logs.iOSUnified", "src\Plugin.Logs.iOSUnified\Plugin.Logs.iOSUnified.csproj", "{17839C73-F6C9-4AED-9534-FDF8D07673F7}"
 EndProject
@@ -17,6 +17,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Plugin.Logs.Droid.Test", "tests\Plugin.Logs.Droid.Test\Plugin.Logs.Droid.Test.csproj", "{8E44BD1B-7CF3-47A7-8620-D4F743C06FCF}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Plugin.Logs.Droid", "src\Plugin.Logs.Droid\Plugin.Logs.Droid.csproj", "{D06C7166-9838-4DCD-B84A-DCA40DAD70D4}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Plug.Logs.NetStandard", "src\Plug.Logs.NetStandard\Plug.Logs.NetStandard.csproj", "{822475D8-C61D-48DB-A245-8A3DB8995598}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -208,6 +210,30 @@ Global
 		{D06C7166-9838-4DCD-B84A-DCA40DAD70D4}.Release|x64.Build.0 = Release|Any CPU
 		{D06C7166-9838-4DCD-B84A-DCA40DAD70D4}.Release|x86.ActiveCfg = Release|Any CPU
 		{D06C7166-9838-4DCD-B84A-DCA40DAD70D4}.Release|x86.Build.0 = Release|Any CPU
+		{822475D8-C61D-48DB-A245-8A3DB8995598}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{822475D8-C61D-48DB-A245-8A3DB8995598}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{822475D8-C61D-48DB-A245-8A3DB8995598}.Debug|ARM.ActiveCfg = Debug|Any CPU
+		{822475D8-C61D-48DB-A245-8A3DB8995598}.Debug|ARM.Build.0 = Debug|Any CPU
+		{822475D8-C61D-48DB-A245-8A3DB8995598}.Debug|iPhone.ActiveCfg = Debug|Any CPU
+		{822475D8-C61D-48DB-A245-8A3DB8995598}.Debug|iPhone.Build.0 = Debug|Any CPU
+		{822475D8-C61D-48DB-A245-8A3DB8995598}.Debug|iPhoneSimulator.ActiveCfg = Debug|Any CPU
+		{822475D8-C61D-48DB-A245-8A3DB8995598}.Debug|iPhoneSimulator.Build.0 = Debug|Any CPU
+		{822475D8-C61D-48DB-A245-8A3DB8995598}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{822475D8-C61D-48DB-A245-8A3DB8995598}.Debug|x64.Build.0 = Debug|Any CPU
+		{822475D8-C61D-48DB-A245-8A3DB8995598}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{822475D8-C61D-48DB-A245-8A3DB8995598}.Debug|x86.Build.0 = Debug|Any CPU
+		{822475D8-C61D-48DB-A245-8A3DB8995598}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{822475D8-C61D-48DB-A245-8A3DB8995598}.Release|Any CPU.Build.0 = Release|Any CPU
+		{822475D8-C61D-48DB-A245-8A3DB8995598}.Release|ARM.ActiveCfg = Release|Any CPU
+		{822475D8-C61D-48DB-A245-8A3DB8995598}.Release|ARM.Build.0 = Release|Any CPU
+		{822475D8-C61D-48DB-A245-8A3DB8995598}.Release|iPhone.ActiveCfg = Release|Any CPU
+		{822475D8-C61D-48DB-A245-8A3DB8995598}.Release|iPhone.Build.0 = Release|Any CPU
+		{822475D8-C61D-48DB-A245-8A3DB8995598}.Release|iPhoneSimulator.ActiveCfg = Release|Any CPU
+		{822475D8-C61D-48DB-A245-8A3DB8995598}.Release|iPhoneSimulator.Build.0 = Release|Any CPU
+		{822475D8-C61D-48DB-A245-8A3DB8995598}.Release|x64.ActiveCfg = Release|Any CPU
+		{822475D8-C61D-48DB-A245-8A3DB8995598}.Release|x64.Build.0 = Release|Any CPU
+		{822475D8-C61D-48DB-A245-8A3DB8995598}.Release|x86.ActiveCfg = Release|Any CPU
+		{822475D8-C61D-48DB-A245-8A3DB8995598}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
