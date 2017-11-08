@@ -9,8 +9,10 @@ logService.Log("Message");
 logService.Log(new NotImplementedException());
 ```
 
+## NuGet
+* Available on NuGet: [Plugin.Logs](http://www.nuget.org/packages/Plugin.Logs) [![NuGet](https://img.shields.io/nuget/v/Plugin.Logs.svg?label=NuGet)](https://www.nuget.org/packages/Plugin.Logs/)
 
-
+## Build
 [![Build status](https://ci.appveyor.com/api/projects/status/6b5nojsd4ex6gk70?svg=true)](https://ci.appveyor.com/project/jgiacomini/logsplugin)
 
 |Platform|Supported|Version|
