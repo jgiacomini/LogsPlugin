@@ -33,7 +33,7 @@ logService.Log("message", new NotImplementedException());
 |Windows Phone RT|No|8.1+|
 |Windows Store RT|No|8.1+|
 |Windows 10 UWP|Yes|10+|
-|Xamarin.Mac|No|All|
+|Xamarin.Mac|Yes|All|
 |.NET 4.5|Yes|All|
 
 ### Created By: [@JeromeGiacomini](https://twitter.com/jeromegiacomini)
