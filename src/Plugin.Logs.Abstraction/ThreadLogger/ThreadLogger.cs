@@ -12,7 +12,7 @@ namespace Plugin.Logs
     /// </summary>
     /// <seealso cref="System.IDisposable" />
     internal class ThreadLogger : IDisposable
-	{
+    {
         #region Fields
         /// <summary>
         /// The instance
@@ -29,15 +29,15 @@ namespace Plugin.Logs
         /// </summary>
         private bool _isAlive = true;
 
-		/// <summary>
-		/// The _queued
-		/// </summary>
-		protected ConcurrentQueue<DataToLog> _queued = new ConcurrentQueue<DataToLog>();
-		#endregion
+        /// <summary>
+        /// The _queued
+        /// </summary>
+        protected ConcurrentQueue<DataToLog> _queued = new ConcurrentQueue<DataToLog>();
+        #endregion
 
-		/// <summary>
-		/// Initializes a new instance of the <see cref="ThreadLogger"/> class.
-		/// </summary>
+        /// <summary>
+        /// Initializes a new instance of the <see cref="ThreadLogger"/> class.
+        /// </summary>
         private ThreadLogger()
         {
             Start();
@@ -65,61 +65,63 @@ namespace Plugin.Logs
         /// Launches this instance.
         /// </summary>
         public void Start()
-		{
-			Task.Run(() =>
-			{
-				MainLoop();
-			});
-		}
+        {
+            Task.Run(() =>
+            {
+                MainLoop();
+            });
+        }
 
-		/// <summary>
-		/// Gets a value indicating whether this instance is alive.
-		/// </summary>
-		/// <value>
-		///   <c>true</c> if this instance is alive; otherwise, <c>false</c>.
-		/// </value>
-		protected bool IsAlive
-		{
-			get
-			{
-				return _isAlive;
-			}
-		}
+        /// <summary>
+        /// Gets a value indicating whether this instance is alive.
+        /// </summary>
+        /// <value>
+        ///   <c>true</c> if this instance is alive; otherwise, <c>false</c>.
+        /// </value>
+        protected bool IsAlive
+        {
+            get
+            {
+                return _isAlive;
+            }
+        }
 
-		/// <summary>
-		/// Threads the loop.
-		/// </summary>
-		protected async void MainLoop()
-		{
-			while (IsAlive)
-			{
-				await Task.Delay(200);
-				await FlushAsync();
-			}
-		}
+        /// <summary>
+        /// Threads the loop.
+        /// </summary>
+        protected async void MainLoop()
+        {
+            while (IsAlive)
+            {
+                await Task.Delay(200);
+                await FlushAsync();
+            }
+        }
 
-		/// <summary>
-		/// Flushes the asynchronous.
-		/// </summary>
-		/// <returns>return a task</returns>
-		public async Task FlushAsync()
-		{
-			try
-			{
-				while (!_queued.IsEmpty)
-				{
-					DataToLog dataToLog;
-					if (_queued.TryDequeue(out dataToLog))
-					{
+        /// <summary>
+        /// Flushes the asynchronous.
+        /// </summary>
+        /// <returns>return a task</returns>
+        public async Task FlushAsync()
+        {
+            while (!_queued.IsEmpty)
+            {
+                DataToLog dataToLog;
+
+                if (_queued.TryDequeue(out dataToLog))
+                {
+                    try
+                    {
                         await dataToLog.LogWritterService.WriteLogAsync(dataToLog);
-					}
-				}
-			}
-			catch (Exception ex)
-			{
-				Debug.WriteLine(ex.Message);
-			}
-		}
+                    }
+                    catch (Exception ex)
+                    {
+                        _queued.Enqueue(dataToLog);
+                        Debug.WriteLine(ex.Message);
+                    }
+                }
+            }
+        }
 
         /// <summary>
         /// Adds the data to log.
@@ -128,15 +130,15 @@ namespace Plugin.Logs
         /// <param name="logLevel">The log level.</param>
         /// <param name="logWritterService">The log writter service.</param>
         public void AddDataToLog(string data, LogLevel logLevel, ILogWriterService logWritterService)
-		{
-			var dataToLog = new DataToLog(data, logLevel, logWritterService);
-			_queued.Enqueue(dataToLog);
-		}
+        {
+            var dataToLog = new DataToLog(data, logLevel, logWritterService);
+            _queued.Enqueue(dataToLog);
+        }
 
-		/// <inheritdoc />
-		public void Dispose()
-		{
-			_isAlive = false;
-		}
-	}
+        /// <inheritdoc />
+        public void Dispose()
+        {
+            _isAlive = false;
+        }
+    }
 }

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using NUnit.Framework;
 using Plugin.Logs.Model;
 
-namespace Plugin.Logs.iOSUnified.Test
+namespace Plugin.Logs.Test
 {
     [TestFixture]
     public class LogServiceTest

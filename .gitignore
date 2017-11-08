@@ -238,3 +238,7 @@ ModelManifest.xml
 
 # FAKE - F# Make
 .fake/
+
+
+*.nuspec
+Pack-NugetPackage.ps1
