@@ -36,11 +36,9 @@ logService.Log("message", new NotImplementedException());
 |Xamarin.Mac|No|All|
 |.NET 4.5|Yes|All|
 
-### Created By: [@JamesMontemagno](http://twitter.com/jamesmontemagno)
-* Twitter: [@JamesMontemagno](http://twitter.com/jamesmontemagno)
-* Blog: [MotzCod.es](http://motzcod.es), [Micro Blog](http://motz.micro.blog)
-* Podcasts: [Merge Conflict](http://mergeconflict.fm), [Coffeehouse Blunders](http://blunders.fm), [The Xamarin Podcast](http://xamarinpodcast.com)
-* Video: [The Xamarin Show on Channel 9](http://xamarinshow.com), [YouTube Channel](https://www.youtube.com/jamesmontemagno) 
+### Created By: [@JeromeGiacomini](https://twitter.com/jeromegiacomini)
+* Twitter: [@JeromeGiacomini](http://twitter.com/jeromegiacomini)
+* Blog: [Blog perso](http://jeromegiacomini.net/Blog/), [Blog pro](http://blogs.infinitesquare.com/users/jgiacomini)
 
 ## License
 MIT © JGI
