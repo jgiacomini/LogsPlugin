@@ -76,9 +76,9 @@
       <Project>{3987c3ae-dd46-4692-be1b-f376e210ef95}</Project>
       <Name>Plugin.Logs.Abstraction</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\src\Plugin.Logs.Droid\Plugin.Logs.Droid.csproj">
-      <Project>{d06c7166-9838-4dcd-b84a-dca40dad70d4}</Project>
-      <Name>Plugin.Logs.Droid</Name>
+    <ProjectReference Include="..\..\src\Plugin.Logs\Plugin.Logs.csproj">
+      <Project>{34b1a27e-b294-4b1c-ad1e-116610e64cfb}</Project>
+      <Name>Plugin.Logs</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
