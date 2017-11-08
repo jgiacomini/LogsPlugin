@@ -2,6 +2,11 @@
 
   <PropertyGroup>
     <TargetFrameworks>netstandard1.6;net45</TargetFrameworks>
+    <Version>1.1.0</Version>
+    <Copyright>Copyright © Jérôme Giacomini 2017</Copyright>
+    <NeutralLanguage>en</NeutralLanguage>
+    <Authors>Jérôme Giacomini</Authors>
+    <Description>Log plugin for all .Net platform</Description>
   </PropertyGroup>
 
   <ItemGroup>

@@ -1,0 +1,9 @@
+<Project>
+  <PropertyGroup>
+    <ChangeLogFile>$(MSBuildProjectDirectory)\changelog.txt</ChangeLogFile>
+    <PackageReleaseNotes Condition="Exists('$(ChangeLogFile)')">$([System.IO.File]::ReadAllText($(ChangeLogFile)))</PackageReleaseNotes>
+  </PropertyGroup>
+  <ItemGroup>
+    <None Remove="**/*.vspscc" />
+  </ItemGroup>
+</Project>
