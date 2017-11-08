@@ -56,9 +56,6 @@
     <Compile Include="Resources\Resource.Designer.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\AboutResources.txt" />
-  </ItemGroup>
-  <ItemGroup>
     <ProjectReference Include="..\Plugin.Logs.Abstraction\Plugin.Logs.Abstraction.csproj">
       <Project>{3987c3ae-dd46-4692-be1b-f376e210ef95}</Project>
       <Name>Plugin.Logs.Abstraction</Name>
