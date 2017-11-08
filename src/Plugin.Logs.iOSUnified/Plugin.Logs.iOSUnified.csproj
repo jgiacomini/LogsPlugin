@@ -62,7 +62,7 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Plugin.Logs.Abstraction\Plugin.Logs.Abstraction.csproj">
-      <Project>{3987C3AE-DD46-4692-BE1B-F376E210EF95}</Project>
+      <Project>{3987c3ae-dd46-4692-be1b-f376e210ef95}</Project>
       <Name>Plugin.Logs.Abstraction</Name>
     </ProjectReference>
   </ItemGroup>

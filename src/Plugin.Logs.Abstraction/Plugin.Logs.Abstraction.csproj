@@ -7,8 +7,4 @@
     <Authors>Jérôme Giacomini</Authors>
     <Description>Log plugin for all .Net platform</Description>
   </PropertyGroup>
-  <ItemGroup>
-    <Folder Include="Properties\" />
-  </ItemGroup>
-
 </Project>

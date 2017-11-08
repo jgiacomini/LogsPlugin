@@ -100,13 +100,13 @@
     <Compile Include="LogServiceTest.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\src\Plug.Logs.NetStandard\Plug.Logs.NetStandard.csproj">
+      <Project>{822475d8-c61d-48db-a245-8a3db8995598}</Project>
+      <Name>Plug.Logs.NetStandard</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\src\Plugin.Logs.Abstraction\Plugin.Logs.Abstraction.csproj">
       <Project>{3987C3AE-DD46-4692-BE1B-F376E210EF95}</Project>
       <Name>Plugin.Logs.Abstraction</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\src\Plugin.Logs.iOSUnified\Plugin.Logs.iOSUnified.csproj">
-      <Project>{17839C73-F6C9-4AED-9534-FDF8D07673F7}</Project>
-      <Name>Plugin.Logs.iOSUnified</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />

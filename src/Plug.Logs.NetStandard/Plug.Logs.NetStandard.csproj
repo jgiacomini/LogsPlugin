@@ -1,19 +1,11 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>netstandard2.0</TargetFramework>
+    <TargetFrameworks>netstandard1.6;net45</TargetFrameworks>
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Include="..\src\Plugin.Logs.iOSUnified\Writer\LogWriterService.cs" Link="Writer\LogWriterService.cs" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Writer\" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <ProjectReference Include="..\src\Plugin.Logs.Abstraction\Plugin.Logs.Abstraction.csproj" />
+    <ProjectReference Include="..\Plugin.Logs.Abstraction\Plugin.Logs.Abstraction.csproj" />
   </ItemGroup>
 
 </Project>
