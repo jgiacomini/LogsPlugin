@@ -1,16 +1,21 @@
 <Project Sdk="Microsoft.NET.Sdk">
-
+  
   <PropertyGroup>
+    <Title>Plugin Logs abstraction</Title>
     <TargetFrameworks>netstandard1.6;net45</TargetFrameworks>
     <Version>1.1.0</Version>
     <Copyright>Copyright © Jérôme Giacomini 2017</Copyright>
     <NeutralLanguage>en</NeutralLanguage>
     <Authors>Jérôme Giacomini</Authors>
     <Description>Log plugin for all .Net platform</Description>
+    <PackageLicenseUrl>https://github.com/jgiacomini/LogsPlugin/blob/master/LICENSE</PackageLicenseUrl>
+    <PackageProjectUrl>https://github.com/jgiacomini/LogsPlugin</PackageProjectUrl>
+    <PackageIconUrl>https://raw.githubusercontent.com/jgiacomini/LogsPlugin/master/icon.png</PackageIconUrl>
+    <PackageTags>logs;logging;xamarin pcl;xam.pcl;plugin for windows phone;winphone;wp8;winrt;uwp;android;xamarin.forms;ios;monoandroid;monodroid;monotouch;mvvmcross</PackageTags>
+    <MinClientVersion>3.0.3</MinClientVersion>
   </PropertyGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\Plugin.Logs.Abstraction\Plugin.Logs.Abstraction.csproj" />
   </ItemGroup>
-
 </Project>
