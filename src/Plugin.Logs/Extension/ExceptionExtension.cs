@@ -62,6 +62,7 @@ namespace Plugin.Logs.Extension
                 sb.AppendLine();
                 sb.AppendFormat("{0}Stacktrace: {1}", indent, e.StackTrace);
             }
+
             if (e.Data != null)
             {
                 sb.AppendLine();
@@ -95,6 +96,5 @@ namespace Plugin.Logs.Extension
                 CreateExceptionString(sb, e.InnerException, indent + "  ");
             }
         }
-
     }
 }

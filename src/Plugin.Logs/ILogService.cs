@@ -36,8 +36,8 @@ namespace Plugin.Logs
         /// Logs the specified exception and his custom message.
         /// </summary>
         /// <param name="message">The message</param>
-		/// <param name="exception">The exception.</param>
-		/// <param name="logLevel">The log level.</param>
+        /// <param name="exception">The exception.</param>
+        /// <param name="logLevel">The log level.</param>
         void Log(string message, Exception exception, LogLevel logLevel = LogLevel.Error);
 
         /// <summary>

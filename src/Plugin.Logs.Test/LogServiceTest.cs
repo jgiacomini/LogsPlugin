@@ -11,9 +11,9 @@ namespace Plugin.Logs.Test
     [TestClass]
     public class LogServiceTest
     {
-        private readonly string FILE_PREFIX = "Test";
+        private readonly string _fILE_PREFIX = "Test";
 
-        string GetRandomDirectoryPath(string fileName)
+        private string GetRandomDirectoryPath(string fileName)
         {
             var path = Path.Combine(Path.GetTempPath(), fileName);
             Directory.CreateDirectory(path);
@@ -21,13 +21,12 @@ namespace Plugin.Logs.Test
             return path;
         }
 
-
         [TestMethod]
         public async Task Logs_Service_LogInfoAsync()
         {
             var directoryPath = GetRandomDirectoryPath("Infos");
 
-            var filePrefix = FILE_PREFIX + "LogInfo";
+            var filePrefix = _fILE_PREFIX + "LogInfo";
             using (var logService = new LogService(filePrefix, directoryPath))
             {
                 Debug.WriteLine(directoryPath);
@@ -41,12 +40,11 @@ namespace Plugin.Logs.Test
             }
         }
 
-
         [TestMethod]
         public async Task LogService_FlushAsync()
         {
             var directoryPath = GetRandomDirectoryPath("Flush");
-            var filePrefix = FILE_PREFIX + "_flush";
+            var filePrefix = _fILE_PREFIX + "_flush";
             using (var logService = new LogService(filePrefix, directoryPath))
             {
                 Debug.WriteLine(directoryPath);
@@ -63,11 +61,10 @@ namespace Plugin.Logs.Test
         public async Task LogService_WriteBigString()
         {
             var directoryPath = GetRandomDirectoryPath("BigString");
-            var filePrefix = FILE_PREFIX + "_bigString";
+            var filePrefix = _fILE_PREFIX + "_bigString";
             using (var logService = new LogService(filePrefix, directoryPath))
             {
                 Debug.WriteLine(directoryPath);
-
 
                 var sb = new StringBuilder();
 
@@ -101,7 +98,7 @@ namespace Plugin.Logs.Test
         public async Task LogService_LogErrorAsync()
         {
             var directoryPath = GetRandomDirectoryPath("LogError");
-            var filePrefix = FILE_PREFIX + "_LogError";
+            var filePrefix = _fILE_PREFIX + "_LogError";
             using (var logService = new LogService(filePrefix, directoryPath))
             {
                 Debug.WriteLine(directoryPath);
@@ -118,7 +115,7 @@ namespace Plugin.Logs.Test
         public async Task LogService_Purge()
         {
             var directoryPath = GetRandomDirectoryPath("Purge");
-            var filePrefix = FILE_PREFIX + "_Purge";
+            var filePrefix = _fILE_PREFIX + "_Purge";
 
             uint dayTokeep = 30;
             var dayToTests = 5;
@@ -129,6 +126,7 @@ namespace Plugin.Logs.Test
                 Debug.WriteLine(directoryPath);
 
                 var pastMonth = Path.Combine(directoryPath, today.AddMonths(-1).ToString("yyyy-MM"));
+
                 // On crée le mois d'avant
                 Directory.CreateDirectory(pastMonth);
 
@@ -136,7 +134,6 @@ namespace Plugin.Logs.Test
                 await logService.FlushAsync();
 
                 Directory.Exists(Path.Combine(directoryPath, today.ToString("yyyy-MM")));
-
 
                 var dateFormat = Path.Combine(directoryPath, $"[DATE_MONTH]{Path.DirectorySeparatorChar}{filePrefix}_log_[DATE_DAY].csv");
 

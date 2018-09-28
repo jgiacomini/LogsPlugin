@@ -14,15 +14,16 @@ namespace Plugin.Logs
     internal class ThreadLogger : IDisposable
     {
         #region Fields
-        /// <summary>
-        /// The instance
-        /// </summary>
-        private static volatile ThreadLogger _instance;
 
         /// <summary>
         /// The synchronize root
         /// </summary>
-        private static object _syncRoot = new Object();
+        private static readonly object _syncRoot = new object();
+
+        /// <summary>
+        /// The instance
+        /// </summary>
+        private static volatile ThreadLogger _instance;
 
         /// <summary>
         /// The is alive
@@ -32,7 +33,7 @@ namespace Plugin.Logs
         /// <summary>
         /// The _queued
         /// </summary>
-        protected ConcurrentQueue<DataToLog> _queued = new ConcurrentQueue<DataToLog>();
+        private ConcurrentQueue<DataToLog> _queued = new ConcurrentQueue<DataToLog>();
         #endregion
 
         /// <summary>
@@ -52,14 +53,15 @@ namespace Plugin.Logs
                     lock (_syncRoot)
                     {
                         if (_instance == null)
+                        {
                             _instance = new ThreadLogger();
+                        }
                     }
                 }
 
                 return _instance;
             }
         }
-
 
         /// <summary>
         /// Launches this instance.
@@ -106,9 +108,7 @@ namespace Plugin.Logs
         {
             while (!_queued.IsEmpty)
             {
-                DataToLog dataToLog;
-
-                if (_queued.TryDequeue(out dataToLog))
+                if (_queued.TryDequeue(out DataToLog dataToLog))
                 {
                     try
                     {

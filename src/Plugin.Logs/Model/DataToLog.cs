@@ -2,11 +2,11 @@
 using System;
 namespace Plugin.Logs.Model
 {
-	/// <summary>
-	/// The data to log
-	/// </summary>
+    /// <summary>
+    /// The data to log
+    /// </summary>
     public class DataToLog
-	{
+    {
         /// <summary>
         /// Initializes a new instance of the <see cref="DataToLog"/> class.
         /// </summary>
@@ -14,30 +14,30 @@ namespace Plugin.Logs.Model
         /// <param name="logLevel">The log level.</param>
         /// <param name="logWritterService">The log writter service.</param>
         public DataToLog(string data, LogLevel logLevel, ILogWriterService logWritterService)
-		{
-			Data = data;
-			When = DateTime.Now;
-			Level = logLevel;
+        {
+            Data = data;
+            When = DateTime.Now;
+            Level = logLevel;
             LogWritterService = logWritterService;
-		}
+        }
 
-		/// <summary>
-		/// Gets or sets the data.
-		/// </summary>
-		/// <value>
-		/// The data.
-		/// </value>
-		public string Data { get; set; }
+        /// <summary>
+        /// Gets or sets the data.
+        /// </summary>
+        /// <value>
+        /// The data.
+        /// </value>
+        public string Data { get; set; }
 
-		/// <summary>
-		/// When does it occured
-		/// </summary>
-		public DateTime When { get; private set; }
+        /// <summary>
+        /// When does it occured
+        /// </summary>
+        public DateTime When { get; private set; }
 
-		/// <summary>
-		/// Level of the log
-		/// </summary>
-		public LogLevel Level { get; set; }
+        /// <summary>
+        /// Level of the log
+        /// </summary>
+        public LogLevel Level { get; set; }
 
         /// <summary>
         /// Gets the log writter service.

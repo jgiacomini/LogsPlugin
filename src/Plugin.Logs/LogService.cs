@@ -8,8 +8,8 @@ namespace Plugin.Logs
     /// <summary>
     /// Service to log anything you want. There is some magic in it.
     /// </summary>
-    public class LogService : IDisposable
-	{
+    public class LogService : ILogService
+    {
         /// <summary>
         /// The log writer
         /// </summary>
@@ -26,21 +26,19 @@ namespace Plugin.Logs
         /// <param name="fileName">Name of the file.</param>
         /// <param name="logDirectoryPath">The log directory path.</param>
         public LogService(string fileName, string logDirectoryPath, uint nbDaysToKeep = 60)
-		{
+            : this(new LogWriterService(fileName, logDirectoryPath), nbDaysToKeep)
+        {
             NbDaysToKeep = nbDaysToKeep;
-            var logWriter = new LogWriterService(fileName, logDirectoryPath);
+        }
 
-            if (logWriter == null)
-            {
-                throw new ArgumentNullException("logWriter");
-            }
-
-            _logWriter = logWriter;
+        public LogService(ILogWriterService logWriter, uint nbDaysToKeep = 60)
+        {
+            NbDaysToKeep = nbDaysToKeep;
+            _logWriter = logWriter ?? throw new ArgumentNullException("logWriter");
 
             logWriter.PurgeOldDaysAsync(NbDaysToKeep).ConfigureAwait(false);
         }
-         
-           
+
         /// <inheritdoc />
         public uint NbDaysToKeep
         {
@@ -48,6 +46,7 @@ namespace Plugin.Logs
             {
                 return _nbDaysToKeep;
             }
+
             private set
             {
                 if (value < 1)
@@ -59,41 +58,41 @@ namespace Plugin.Logs
             }
         }
 
-            /// <inheritdoc />
-            public void Log(string message, LogLevel logLevel = LogLevel.Information)
-            {
-                ThreadLogger.Instance.AddDataToLog(message, logLevel, _logWriter);
-            }
+        /// <inheritdoc />
+        public void Log(string message, LogLevel logLevel = LogLevel.Information)
+        {
+            ThreadLogger.Instance.AddDataToLog(message, logLevel, _logWriter);
+        }
 
-            /// <inheritdoc />
-            public void Log(Exception exception, LogLevel logLevel = LogLevel.Error)
-            {
-                ThreadLogger.Instance.AddDataToLog(exception.CreateExceptionString(), logLevel, _logWriter);
-            }
+        /// <inheritdoc />
+        public void Log(Exception exception, LogLevel logLevel = LogLevel.Error)
+        {
+            ThreadLogger.Instance.AddDataToLog(exception.CreateExceptionString(), logLevel, _logWriter);
+        }
 
-            /// <inheritdoc />
-            public void Log(string message, Exception exception, LogLevel logLevel = LogLevel.Error)
-            {
-                ThreadLogger.Instance.AddDataToLog($"{message} {Environment.NewLine}{exception.CreateExceptionString()}", logLevel, _logWriter);
-            }
+        /// <inheritdoc />
+        public void Log(string message, Exception exception, LogLevel logLevel = LogLevel.Error)
+        {
+            ThreadLogger.Instance.AddDataToLog($"{message} {Environment.NewLine}{exception.CreateExceptionString()}", logLevel, _logWriter);
+        }
 
-            /// <inheritdoc />
-            public System.Threading.Tasks.Task FlushAsync()
-            {
-                return ThreadLogger.Instance.FlushAsync();
-            }
+        /// <inheritdoc />
+        public System.Threading.Tasks.Task FlushAsync()
+        {
+            return ThreadLogger.Instance.FlushAsync();
+        }
 
-            /// <inheritdoc />
-            public System.Threading.Tasks.Task PurgeOldDaysAsync()
-            {
-                return _logWriter.PurgeOldDaysAsync(NbDaysToKeep);
-            }
+        /// <inheritdoc />
+        public System.Threading.Tasks.Task PurgeOldDaysAsync()
+        {
+            return _logWriter.PurgeOldDaysAsync(NbDaysToKeep);
+        }
 
-            /// <inheritdoc />
-            public void Dispose()
-            {
-                _logWriter.Dispose();
-                ThreadLogger.Instance.Dispose();
-            }
+        /// <inheritdoc />
+        public void Dispose()
+        {
+            _logWriter.Dispose();
+            ThreadLogger.Instance.Dispose();
         }
     }
+}
