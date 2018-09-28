@@ -1,4 +1,7 @@
-﻿- 1.1.0 : 
+﻿- 1.2.0 : 
+Move to .NET Standars 2.0
+
+- 1.1.0 : 
  Move to .NET Standard
  Android is now supported
  Add method with message and exception in parameter in ILogService

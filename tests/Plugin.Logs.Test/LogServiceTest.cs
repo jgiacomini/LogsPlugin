@@ -1,14 +1,14 @@
-﻿﻿using System;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Plugin.Logs.Model;
+using System;
 using System.Diagnostics;
 using System.IO;
 using System.Text;
 using System.Threading.Tasks;
-using NUnit.Framework;
-using Plugin.Logs.Model;
 
 namespace Plugin.Logs.Test
 {
-    [TestFixture]
+    [TestClass]
     public class LogServiceTest
     {
         private readonly string FILE_PREFIX = "Test";
@@ -22,12 +22,12 @@ namespace Plugin.Logs.Test
         }
 
 
-        [Test]
+        [TestMethod]
         public async Task Logs_Service_LogInfoAsync()
         {
-			var directoryPath = GetRandomDirectoryPath("Infos");
+            var directoryPath = GetRandomDirectoryPath("Infos");
 
-			var filePrefix = FILE_PREFIX + "LogInfo";
+            var filePrefix = FILE_PREFIX + "LogInfo";
             using (var logService = new LogService(filePrefix, directoryPath))
             {
                 Debug.WriteLine(directoryPath);
@@ -37,12 +37,12 @@ namespace Plugin.Logs.Test
                 var today = DateTime.Now;
 
                 var fileName = Path.Combine(directoryPath, $"{today.ToString("yyyy-MM")}{Path.DirectorySeparatorChar}{filePrefix}_log_{today.ToString("yyyy-MM-dd")}.csv");
-				Assert.IsTrue(File.Exists(fileName), $"File doesn't exist {fileName}");
+                Assert.IsTrue(File.Exists(fileName), $"File doesn't exist {fileName}");
             }
         }
 
-		
-        [Test]
+
+        [TestMethod]
         public async Task LogService_FlushAsync()
         {
             var directoryPath = GetRandomDirectoryPath("Flush");
@@ -54,19 +54,19 @@ namespace Plugin.Logs.Test
                 logService.Log("log information test", LogLevel.Information);
                 await logService.FlushAsync();
                 var today = DateTime.Today;
-                var fileName = Path.Combine(directoryPath, Path.Combine($"{today.ToString("yyyy-MM")}",$"{filePrefix}_log_{today.ToString("yyyy-MM-dd")}.csv"));
+                var fileName = Path.Combine(directoryPath, Path.Combine($"{today.ToString("yyyy-MM")}", $"{filePrefix}_log_{today.ToString("yyyy-MM-dd")}.csv"));
                 Assert.IsTrue(File.Exists(fileName), $"File doesn't exist {fileName}");
             }
         }
 
-        [Test]
-		public async Task LogService_WriteBigString()
-		{
-			var directoryPath = GetRandomDirectoryPath("BigString");
-			var filePrefix = FILE_PREFIX + "_bigString";
+        [TestMethod]
+        public async Task LogService_WriteBigString()
+        {
+            var directoryPath = GetRandomDirectoryPath("BigString");
+            var filePrefix = FILE_PREFIX + "_bigString";
             using (var logService = new LogService(filePrefix, directoryPath))
-			{
-				Debug.WriteLine(directoryPath);
+            {
+                Debug.WriteLine(directoryPath);
 
 
                 var sb = new StringBuilder();
@@ -75,14 +75,14 @@ namespace Plugin.Logs.Test
                 {
                     for (int i = 0; i < 10000; i++)
                     {
-						sb.AppendLine("azertyuipqsdfghjklmwxcvbn,;:");
-						sb.AppendLine("azertyuipqsdfghjklmwxcvbn,;:");
-						sb.AppendLine("azertyuipqsdfghjklmwxcvbn,;:");
-						sb.AppendLine("azertyuipqsdfghjklmwxcvbn,;:");
                         sb.AppendLine("azertyuipqsdfghjklmwxcvbn,;:");
                         sb.AppendLine("azertyuipqsdfghjklmwxcvbn,;:");
-						sb.AppendLine("azertyuipqsdfghjklmwxcvbn,;:");
-						sb.AppendLine("azertyuipqsdfghjklmwxcvbn,;:");
+                        sb.AppendLine("azertyuipqsdfghjklmwxcvbn,;:");
+                        sb.AppendLine("azertyuipqsdfghjklmwxcvbn,;:");
+                        sb.AppendLine("azertyuipqsdfghjklmwxcvbn,;:");
+                        sb.AppendLine("azertyuipqsdfghjklmwxcvbn,;:");
+                        sb.AppendLine("azertyuipqsdfghjklmwxcvbn,;:");
+                        sb.AppendLine("azertyuipqsdfghjklmwxcvbn,;:");
                         sb.AppendLine("azertyuipqsdfghjklmwxcvbn,;:");
                         sb.AppendLine("azertyuipqsdfghjklmwxcvbn,;:");
                     }
@@ -91,13 +91,13 @@ namespace Plugin.Logs.Test
                 logService.Log(sb.ToString(), LogLevel.Information);
 
                 await logService.FlushAsync().ConfigureAwait(false);
-				var today = DateTime.Today;
-                        var fileName = Path.Combine(directoryPath, $"{today.ToString("yyyy-MM")}{Path.DirectorySeparatorChar}{filePrefix}_log_{today.ToString("yyyy-MM-dd")}.csv");
-				Assert.IsTrue(File.Exists(fileName), $"File doesn't exist {fileName}");
-			}
-		}
+                var today = DateTime.Today;
+                var fileName = Path.Combine(directoryPath, $"{today.ToString("yyyy-MM")}{Path.DirectorySeparatorChar}{filePrefix}_log_{today.ToString("yyyy-MM-dd")}.csv");
+                Assert.IsTrue(File.Exists(fileName), $"File doesn't exist {fileName}");
+            }
+        }
 
-        [Test]
+        [TestMethod]
         public async Task LogService_LogErrorAsync()
         {
             var directoryPath = GetRandomDirectoryPath("LogError");
@@ -107,20 +107,20 @@ namespace Plugin.Logs.Test
                 Debug.WriteLine(directoryPath);
                 var inner = new ArgumentOutOfRangeException("out of range mother fucker");
                 logService.Log(new ArgumentNullException("log error test", inner), LogLevel.Error);
-				await logService.FlushAsync();
-				var today = DateTime.Now;
-                        Assert.IsTrue(File.Exists(Path.Combine(directoryPath, $"{today.ToString("yyyy-MM")}{Path.DirectorySeparatorChar}{filePrefix}_log_{today.ToString("yyyy-MM-dd")}.csv")));
-                        Assert.IsTrue(File.Exists(Path.Combine(directoryPath, $"{today.ToString("yyyy-MM")}{Path.DirectorySeparatorChar}{filePrefix}_error_{today.ToString("yyyy-MM-dd")}.csv")));
+                await logService.FlushAsync();
+                var today = DateTime.Now;
+                Assert.IsTrue(File.Exists(Path.Combine(directoryPath, $"{today.ToString("yyyy-MM")}{Path.DirectorySeparatorChar}{filePrefix}_log_{today.ToString("yyyy-MM-dd")}.csv")));
+                Assert.IsTrue(File.Exists(Path.Combine(directoryPath, $"{today.ToString("yyyy-MM")}{Path.DirectorySeparatorChar}{filePrefix}_error_{today.ToString("yyyy-MM-dd")}.csv")));
             }
         }
 
-        [Test]
+        [TestMethod]
         public async Task LogService_Purge()
         {
             var directoryPath = GetRandomDirectoryPath("Purge");
             var filePrefix = FILE_PREFIX + "_Purge";
 
-            uint dayTokeep= 30;
+            uint dayTokeep = 30;
             var dayToTests = 5;
 
             using (var logService = new LogService(filePrefix, directoryPath, dayTokeep))
@@ -129,17 +129,17 @@ namespace Plugin.Logs.Test
                 Debug.WriteLine(directoryPath);
 
                 var pastMonth = Path.Combine(directoryPath, today.AddMonths(-1).ToString("yyyy-MM"));
-                // On crée le mois d'avant
+                // On cr�e le mois d'avant
                 Directory.CreateDirectory(pastMonth);
 
                 logService.Log("Test");
-				await logService.FlushAsync();
+                await logService.FlushAsync();
 
-				Directory.Exists(Path.Combine(directoryPath, today.ToString("yyyy-MM")));
-               
-           
+                Directory.Exists(Path.Combine(directoryPath, today.ToString("yyyy-MM")));
+
+
                 var dateFormat = Path.Combine(directoryPath, $"[DATE_MONTH]{Path.DirectorySeparatorChar}{filePrefix}_log_[DATE_DAY].csv");
-                
+
                 for (int i = 0; i < dayTokeep + dayToTests; i++)
                 {
                     var currentDay = today.AddDays(-i);
@@ -176,5 +176,5 @@ namespace Plugin.Logs.Test
                 }
             }
         }
-	}
+    }
 }
