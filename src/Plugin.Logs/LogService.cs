@@ -92,7 +92,6 @@ namespace Plugin.Logs
         public void Dispose()
         {
             _logWriter.Dispose();
-            ThreadLogger.Instance.Dispose();
         }
     }
 }

@@ -10,8 +10,7 @@ namespace Plugin.Logs
     /// <summary>
     /// Manage the main loop to log data
     /// </summary>
-    /// <seealso cref="System.IDisposable" />
-    internal class ThreadLogger : IDisposable
+    internal class ThreadLogger
     {
         #region Fields
 
@@ -41,7 +40,10 @@ namespace Plugin.Logs
         /// </summary>
         private ThreadLogger()
         {
-            Start();
+            Task.Run(() =>
+            {
+                MainLoop();
+            });
         }
 
         public static ThreadLogger Instance
@@ -66,7 +68,7 @@ namespace Plugin.Logs
         /// <summary>
         /// Launches this instance.
         /// </summary>
-        public void Start()
+        private void Start()
         {
             Task.Run(() =>
             {
@@ -80,7 +82,7 @@ namespace Plugin.Logs
         /// <value>
         ///   <c>true</c> if this instance is alive; otherwise, <c>false</c>.
         /// </value>
-        protected bool IsAlive
+        internal bool IsAlive
         {
             get
             {
@@ -91,7 +93,7 @@ namespace Plugin.Logs
         /// <summary>
         /// Threads the loop.
         /// </summary>
-        protected async void MainLoop()
+        private async void MainLoop()
         {
             while (IsAlive)
             {
@@ -104,7 +106,7 @@ namespace Plugin.Logs
         /// Flushes the asynchronous.
         /// </summary>
         /// <returns>return a task</returns>
-        public async Task FlushAsync()
+        internal async Task FlushAsync()
         {
             while (!_queued.IsEmpty)
             {
@@ -129,18 +131,10 @@ namespace Plugin.Logs
         /// <param name="data">The data.</param>
         /// <param name="logLevel">The log level.</param>
         /// <param name="logWritterService">The log writter service.</param>
-        public void AddDataToLog(string data, LogLevel logLevel, ILogWriterService logWritterService)
+        internal void AddDataToLog(string data, LogLevel logLevel, ILogWriterService logWritterService)
         {
             var dataToLog = new DataToLog(data, logLevel, logWritterService);
             _queued.Enqueue(dataToLog);
-        }
-
-        /// <inheritdoc />
-        public void Dispose()
-        {
-            FlushAsync().Wait();
-
-            _isAlive = false;
         }
     }
 }

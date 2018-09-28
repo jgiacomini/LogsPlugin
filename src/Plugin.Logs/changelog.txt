@@ -1,4 +1,6 @@
-﻿- 1.2.2 : 
+﻿- 1.2.4 : 
+  Optimizations
+- 1.2.2 : 
   Fix some bugs
 - 1.2.1 : 
   Add IDisposable on logService 
