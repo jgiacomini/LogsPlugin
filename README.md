@@ -29,14 +29,7 @@ logService.Log("message", new NotImplementedException());
 ## Platform Support
 |Platform|Supported|Version|
 | ------------------- | :-----------: | :------------------: |
-|Xamarin.iOS|Yes|iOS 7+|
-|Xamarin.Android|Yes|API 10+|
-|Windows Phone Silverlight|No|8.0+|
-|Windows Phone RT|No|8.1+|
-|Windows Store RT|No|8.1+|
-|Windows 10 UWP|Yes|10+|
-|Xamarin.Mac|Yes|All|
-|.NET 4.5|Yes|All|
+|.NET Standard|Yes|2.0|
 
 ### Created By: [@JeromeGiacomini](https://twitter.com/jeromegiacomini)
 * Twitter: [@JeromeGiacomini](http://twitter.com/jeromegiacomini)
