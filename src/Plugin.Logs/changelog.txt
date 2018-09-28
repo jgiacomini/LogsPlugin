@@ -1,4 +1,6 @@
-﻿- 1.2.0 : 
+﻿- 1.2.1 : 
+  Add IDisposable on logService 
+- 1.2.0 : 
 Move to .NET Standars 2.0
 
 - 1.1.0 : 
