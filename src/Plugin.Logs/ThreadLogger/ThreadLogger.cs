@@ -138,6 +138,8 @@ namespace Plugin.Logs
         /// <inheritdoc />
         public void Dispose()
         {
+            FlushAsync().Wait();
+
             _isAlive = false;
         }
     }
