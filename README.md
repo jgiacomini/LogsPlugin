@@ -1,5 +1,6 @@
 # LogsPlugin
 [![Build status](https://ci.appveyor.com/api/projects/status/6b5nojsd4ex6gk70?svg=true)](https://ci.appveyor.com/project/jgiacomini/logsplugin)
+[![NuGet](https://img.shields.io/nuget/v/Plugin.Logs.svg?label=NuGet)](https://www.nuget.org/packages/Plugin.Logs/)
 
 Plugin to logs on .Net platforms.  
 ```cs
