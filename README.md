@@ -1,4 +1,6 @@
 # LogsPlugin
+[![Build status](https://ci.appveyor.com/api/projects/status/6b5nojsd4ex6gk70?svg=true)](https://ci.appveyor.com/project/jgiacomini/logsplugin)
+
 Plugin to logs on .Net platforms.  
 ```cs
 using Plugin.Logs;
