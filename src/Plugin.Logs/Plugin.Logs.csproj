@@ -3,7 +3,7 @@
   <PropertyGroup>
     <Title>Plugin Logs</Title>
     <TargetFrameworks>netstandard2.0</TargetFrameworks>
-    <Version>1.2.4</Version>
+    <Version>1.2.5</Version>
     <Copyright>Copyright © Jérôme Giacomini 2018</Copyright>
     <NeutralLanguage>en</NeutralLanguage>
     <Authors>Jérôme Giacomini</Authors>
