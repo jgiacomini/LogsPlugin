@@ -7,8 +7,7 @@ namespace Plugin.Logs.Writer
     /// <summary>
     /// Represent the class which will write the logs
     /// </summary>
-    /// <seealso cref="System.IDisposable" />
-    public interface ILogWriterService : IDisposable
+    public interface ILogWriterService
     {
         /// <summary>
         /// Purges the old days.

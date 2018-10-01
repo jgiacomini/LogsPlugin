@@ -27,7 +27,7 @@ namespace Plugin.Logs
         /// <summary>
         /// The is alive
         /// </summary>
-        private bool _isAlive = true;
+        private readonly bool _isAlive = true;
 
         /// <summary>
         /// The _queued

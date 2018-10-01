@@ -87,11 +87,5 @@ namespace Plugin.Logs
         {
             return _logWriter.PurgeOldDaysAsync(NbDaysToKeep);
         }
-
-        /// <inheritdoc />
-        public void Dispose()
-        {
-            _logWriter.Dispose();
-        }
     }
 }

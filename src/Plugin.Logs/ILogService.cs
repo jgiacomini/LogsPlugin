@@ -7,8 +7,7 @@ namespace Plugin.Logs
     /// <summary>
     /// Represent a Log service
     /// </summary>
-    /// <seealso cref="System.IDisposable" />
-    public interface ILogService : IDisposable
+    public interface ILogService
     {
         /// <summary>
         /// Gets or sets the nb month to keep.

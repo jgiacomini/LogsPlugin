@@ -170,9 +170,5 @@ namespace Plugin.Logs.Writer
             // Return the string
             return value;
         }
-
-        public void Dispose()
-        {
-        }
     }
 }
