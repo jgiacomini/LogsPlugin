@@ -11,7 +11,7 @@ namespace Plugin.Logs.Test
     [TestClass]
     public class LogServiceTest
     {
-        private readonly string _fILE_PREFIX = "Test";
+        private readonly string _file_Prefix = "Test";
 
         private string GetRandomDirectoryPath(string fileName)
         {
@@ -26,7 +26,7 @@ namespace Plugin.Logs.Test
         {
             var directoryPath = GetRandomDirectoryPath("Infos");
 
-            var filePrefix = _fILE_PREFIX + "LogInfo";
+            var filePrefix = _file_Prefix + "LogInfo";
             var logService = new LogService(filePrefix, directoryPath);
             Debug.WriteLine(directoryPath);
             logService.Log("log information test", LogLevel.Information);
@@ -42,7 +42,7 @@ namespace Plugin.Logs.Test
         public async Task LogService_FlushAsync()
         {
             var directoryPath = GetRandomDirectoryPath("Flush");
-            var filePrefix = _fILE_PREFIX + "_flush";
+            var filePrefix = _file_Prefix + "_flush";
             var logService = new LogService(filePrefix, directoryPath);
             Debug.WriteLine(directoryPath);
 
@@ -57,7 +57,7 @@ namespace Plugin.Logs.Test
         public async Task LogService_WriteBigString()
         {
             var directoryPath = GetRandomDirectoryPath("BigString");
-            var filePrefix = _fILE_PREFIX + "_bigString";
+            var filePrefix = _file_Prefix + "_bigString";
             var logService = new LogService(filePrefix, directoryPath);
             Debug.WriteLine(directoryPath);
 
@@ -92,7 +92,7 @@ namespace Plugin.Logs.Test
         public async Task LogService_LogErrorAsync()
         {
             var directoryPath = GetRandomDirectoryPath("LogError");
-            var filePrefix = _fILE_PREFIX + "_LogError";
+            var filePrefix = _file_Prefix + "_LogError";
             var logService = new LogService(filePrefix, directoryPath);
             Debug.WriteLine(directoryPath);
             var inner = new ArgumentOutOfRangeException("out of range mother fucker");
@@ -107,7 +107,7 @@ namespace Plugin.Logs.Test
         public async Task LogService_Purge()
         {
             var directoryPath = GetRandomDirectoryPath("Purge");
-            var filePrefix = _fILE_PREFIX + "_Purge";
+            var filePrefix = _file_Prefix + "_Purge";
 
             uint dayTokeep = 30;
             var dayToTests = 5;
