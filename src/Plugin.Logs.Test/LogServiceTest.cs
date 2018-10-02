@@ -134,8 +134,15 @@ namespace Plugin.Logs.Test
                 var path = dateFormat.Replace("[DATE_MONTH]", currentDay.ToString("yyyy-MM"));
                 path = path.Replace("[DATE_DAY]", currentDay.ToString("yyyy-MM-dd"));
 
-                if (!File.Exists(path))
+                var info = new FileInfo(path);
+
+                if (info.Exists)
                 {
+                    if (!info.Directory.Exists)
+                    {
+                        info.Directory.Create();
+                    }
+
                     using (File.Create(path))
                     {
                     }
