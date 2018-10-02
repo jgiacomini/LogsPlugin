@@ -46,7 +46,7 @@ namespace Plugin.Logs.Test
             var logService = new LogService(filePrefix, directoryPath);
             Debug.WriteLine(directoryPath);
 
-            logService.Log("log information test", LogLevel.Information);
+            logService.Log("log information test_", LogLevel.Information);
             await logService.FlushAsync();
             var today = DateTime.Today;
             var fileName = Path.Combine(directoryPath, Path.Combine($"{today.ToString("yyyy-MM")}", $"{filePrefix}_log_{today.ToString("yyyy-MM-dd")}.csv"));
