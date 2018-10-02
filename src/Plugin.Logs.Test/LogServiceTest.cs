@@ -136,7 +136,9 @@ namespace Plugin.Logs.Test
 
                 if (!File.Exists(path))
                 {
-                    File.Create(path).Dispose();
+                    using (File.Create(path))
+                    {
+                    }
                 }
             }
 
