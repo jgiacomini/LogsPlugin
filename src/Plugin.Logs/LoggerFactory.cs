@@ -15,7 +15,7 @@ namespace Plugin.Logs
                 return _nbDaysToKeep;
             }
 
-            private set
+            set
             {
                 if (value < 1)
                 {

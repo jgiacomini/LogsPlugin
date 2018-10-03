@@ -1,4 +1,6 @@
-﻿- 1.2.5 : 
+﻿- 1.2.6 : 
+  Small fixes
+- 1.2.5 : 
   Add LoggerFactory
 - 1.2.4 : 
   Optimizations
