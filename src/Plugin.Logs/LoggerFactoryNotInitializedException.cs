@@ -4,9 +4,9 @@ using System.Text;
 
 namespace Plugin.Logs
 {
-    public class LogFactoryNotInitializedException : Exception
+    public class LoggerFactoryNotInitializedException : Exception
     {
-        public LogFactoryNotInitializedException()
+        public LoggerFactoryNotInitializedException()
             : base($"{nameof(LoggerFactory)} not initialized")
         {
         }

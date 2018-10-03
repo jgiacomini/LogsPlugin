@@ -50,7 +50,7 @@ namespace Plugin.Logs
         {
             if (string.IsNullOrWhiteSpace(_logDirectoryPath))
             {
-                throw new 
+                throw new LoggerFactoryNotInitializedException();
             }
 
             return new LogService(name, LogDirectoryPath, NbDaysToKeep);
