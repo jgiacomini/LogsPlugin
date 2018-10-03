@@ -164,11 +164,11 @@ namespace Plugin.Logs.Test
                 var fileExist = File.Exists(filePath);
                 if (currentDay >= minDate)
                 {
-                    Assert.IsTrue(fileExist, $"The file would not have to be deleted : {filePath}");
+                    Assert.IsTrue(fileExist, $"The file '{filePath}' have to be deleted");
                 }
                 else
                 {
-                    Assert.IsFalse(fileExist, $"The file should have been deleted : {filePath}");
+                    Assert.IsFalse(fileExist, $"Didn't have to be deleted : {filePath}");
                 }
             }
         }
