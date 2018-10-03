@@ -6,7 +6,13 @@ Plugin to logs on .Net platforms.
 ```cs
 using Plugin.Logs;
 
-var logService = new LogService("log","C:\logs\");
+LoggerFactory.LogDirectoryPath = "C:\logs\";
+
+var logService = LoggerFactory.GetLoggger("Log");
+
+// OR 
+// var logService = new LogService("log","C:\logs\");
+
 //Log a message 
 logService.Log("Message");
 
