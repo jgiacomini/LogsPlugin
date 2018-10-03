@@ -117,10 +117,6 @@ namespace Plugin.Logs.Test
             Debug.WriteLine(directoryPath);
 
             var pastMonth = Path.Combine(directoryPath, today.AddMonths(-1).ToString("yyyy-MM"));
-
-            // On crée le mois d'avant
-            Directory.CreateDirectory(pastMonth);
-
             logService.Log("Test");
             await logService.FlushAsync();
 
@@ -136,7 +132,7 @@ namespace Plugin.Logs.Test
 
                 var info = new FileInfo(path);
 
-                if (info.Exists)
+                if (!info.Exists)
                 {
                     if (!info.Directory.Exists)
                     {
