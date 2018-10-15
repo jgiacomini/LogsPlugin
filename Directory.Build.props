@@ -7,9 +7,6 @@
 
   <PropertyGroup>
     <ChangeLogFile>$(MSBuildProjectDirectory)\changelog.txt</ChangeLogFile>
-    
-    <!-- Add reference to changelogs  -->
-    <PackageReleaseNotes Condition="Exists('$(ChangeLogFile)')">$([System.IO.File]::ReadAllText($(ChangeLogFile)))</PackageReleaseNotes>
   </PropertyGroup>
 
   <ItemGroup>
