@@ -11,10 +11,10 @@ LoggerFactory.LogDirectoryPath = "C:\logs\";
 var logger = LoggerFactory.GetLoggger("Log");
 
 //Log a message 
-logger.Log("Message");
+logger.Info("Message");
 
 //Log a warning message 
-logger.Log("Message", LogLevel.Warning);
+logger.Warning("Message");
 
 // Log an exception
 logger.Log(new NotImplementedException());
