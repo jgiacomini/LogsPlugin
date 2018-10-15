@@ -10,20 +10,17 @@ LoggerFactory.LogDirectoryPath = "C:\logs\";
 
 var logService = LoggerFactory.GetLoggger("Log");
 
-// OR 
-// var logService = new LogService("log","C:\logs\");
-
 //Log a message 
-logService.Log("Message");
+logger.Log("Message");
 
 //Log a warning message 
-logService.Log("Message", LogLevel.Warning);
+logger.Log("Message", LogLevel.Warning);
 
 // Log an exception
-logService.Log(new NotImplementedException());
+logger.Log(new NotImplementedException());
 
 // Log an exception with message
-logService.Log("message", new NotImplementedException());
+logger.Log("message", new NotImplementedException());
 
 ```
 
