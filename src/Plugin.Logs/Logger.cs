@@ -39,13 +39,13 @@ namespace Plugin.Logs
         /// <inheritdoc />
         public void Log(Exception exception, LogLevel logLevel = LogLevel.Error)
         {
-            BackgroundWorker.Instance.AddDataToLog(exception.CreateExceptionString(), logLevel, _logListener);
+            BackgroundWorker.Instance.AddDataToLog(exception.ToFormattedString(), logLevel, _logListener);
         }
 
         /// <inheritdoc />
         public void Log(string message, Exception exception, LogLevel logLevel = LogLevel.Error)
         {
-            BackgroundWorker.Instance.AddDataToLog($"{message} {Environment.NewLine}{exception.CreateExceptionString()}", logLevel, _logListener);
+            BackgroundWorker.Instance.AddDataToLog($"{message} {Environment.NewLine}{exception.ToFormattedString()}", logLevel, _logListener);
         }
 
         /// <inheritdoc />

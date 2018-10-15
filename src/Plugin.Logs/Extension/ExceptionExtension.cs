@@ -14,7 +14,7 @@ namespace Plugin.Logs.Extension
         /// <param name="e">The e.</param>
         /// <param name="message">The message.</param>
         /// <returns>return exception string formatted</returns>
-        public static string CreateExceptionString(this Exception e, string message = null)
+        public static string ToFormattedString(this Exception e, string message = null)
         {
             var sb = new StringBuilder(2000);
             if (!string.IsNullOrEmpty(message))
@@ -22,7 +22,7 @@ namespace Plugin.Logs.Extension
                 sb.AppendLine(message);
             }
 
-            CreateExceptionString(sb, e, string.Empty);
+            ToFormattedString(sb, e, string.Empty);
 
             return sb.ToString();
         }
@@ -33,7 +33,7 @@ namespace Plugin.Logs.Extension
         /// <param name="sb">The sb.</param>
         /// <param name="e">The e.</param>
         /// <param name="indent">The indent.</param>
-        private static void CreateExceptionString(StringBuilder sb, Exception e, string indent)
+        private static void ToFormattedString(StringBuilder sb, Exception e, string indent)
         {
             if (indent == null)
             {
@@ -93,7 +93,7 @@ namespace Plugin.Logs.Extension
 
             if (e.InnerException != null)
             {
-                CreateExceptionString(sb, e.InnerException, indent + "  ");
+                ToFormattedString(sb, e.InnerException, indent + "  ");
             }
         }
     }
