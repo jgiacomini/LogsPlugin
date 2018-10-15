@@ -23,6 +23,6 @@
         /// </summary>
         /// <param name="name">logger name</param>
         /// <returns>return a new logger</returns>
-        ILogService GetLogger(string name);
+        ILogger GetLogger(string name);
     }
 }

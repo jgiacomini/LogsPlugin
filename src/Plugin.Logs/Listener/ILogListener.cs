@@ -7,7 +7,7 @@ namespace Plugin.Logs.Writer
     /// <summary>
     /// Represent the class which will write the logs
     /// </summary>
-    public interface ILogWriterService
+    public interface ILogListener
     {
         /// <summary>
         /// Purges the old days.

@@ -13,12 +13,12 @@ namespace Plugin.Logs.Model
         /// <param name="data">The data.</param>
         /// <param name="logLevel">The log level.</param>
         /// <param name="logWritterService">The log writter service.</param>
-        public DataToLog(string data, LogLevel logLevel, ILogWriterService logWritterService)
+        public DataToLog(string data, LogLevel logLevel, ILogListener logWritterService)
         {
             Data = data;
             When = DateTime.Now;
             Level = logLevel;
-            LogWritterService = logWritterService;
+            Listener = logWritterService;
         }
 
         /// <summary>
@@ -40,11 +40,11 @@ namespace Plugin.Logs.Model
         public LogLevel Level { get; set; }
 
         /// <summary>
-        /// Gets the log writter service.
+        /// Gets the <see cref="ILogListener"/>.
         /// </summary>
         /// <value>
-        /// The log writter service.
+        /// The log <see cref="ILogListener"/>.
         /// </value>
-        public ILogWriterService LogWritterService { get; private set; }
+        public ILogListener Listener { get; private set; }
     }
 }

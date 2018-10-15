@@ -46,14 +46,14 @@ namespace Plugin.Logs
         }
 
         /// <inheritdoc />
-        public ILogService GetLogger(string name)
+        public ILogger GetLogger(string name)
         {
             if (string.IsNullOrWhiteSpace(_logDirectoryPath))
             {
                 throw new LoggerFactoryNotInitializedException();
             }
 
-            return new LogService(name, LogDirectoryPath, NbDaysToKeep);
+            return new Logger(name, LogDirectoryPath, NbDaysToKeep);
         }
     }
 }

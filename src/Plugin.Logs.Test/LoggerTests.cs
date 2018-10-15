@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 namespace Plugin.Logs.Test
 {
     [TestClass]
-    public class LogServiceTest
+    public class LoggerTests
     {
         private readonly string _file_Prefix = "Test";
 
@@ -22,16 +22,21 @@ namespace Plugin.Logs.Test
         }
 
         [TestMethod]
-        public async Task Logs_Service_LogInfoAsync()
+        public async Task Logger_LogInfoAsync()
         {
             var directoryPath = GetRandomDirectoryPath("Infos");
 
             var filePrefix = _file_Prefix + "LogInfo";
-            var logService = new LogService(filePrefix, directoryPath);
-            Debug.WriteLine(directoryPath);
-            logService.Log("log information test", LogLevel.Information);
 
-            await logService.FlushAsync();
+            var factory = new LoggerFactory
+            {
+                LogDirectoryPath = directoryPath,
+            };
+            var logger = factory.GetLogger(filePrefix);
+            Debug.WriteLine(directoryPath);
+            logger.Log("log information test", LogLevel.Information);
+
+            await logger.FlushAsync();
             var today = DateTime.Now;
 
             var fileName = Path.Combine(directoryPath, $"{today.ToString("yyyy-MM")}{Path.DirectorySeparatorChar}{filePrefix}_log_{today.ToString("yyyy-MM-dd")}.csv");
@@ -39,26 +44,35 @@ namespace Plugin.Logs.Test
         }
 
         [TestMethod]
-        public async Task LogService_FlushAsync()
+        public async Task Logger_FlushAsync()
         {
             var directoryPath = GetRandomDirectoryPath("Flush");
             var filePrefix = _file_Prefix + "_flush";
-            var logService = new LogService(filePrefix, directoryPath);
+            var factory = new LoggerFactory
+            {
+                LogDirectoryPath = directoryPath
+            };
+            var logger = factory.GetLogger(filePrefix);
             Debug.WriteLine(directoryPath);
 
-            logService.Log("log information test_", LogLevel.Information);
-            await logService.FlushAsync();
+            logger.Log("log information test_", LogLevel.Information);
+            await logger.FlushAsync();
             var today = DateTime.Today;
             var fileName = Path.Combine(directoryPath, Path.Combine($"{today.ToString("yyyy-MM")}", $"{filePrefix}_log_{today.ToString("yyyy-MM-dd")}.csv"));
             Assert.IsTrue(File.Exists(fileName), $"File doesn't exist {fileName}");
         }
 
         [TestMethod]
-        public async Task LogService_WriteBigString()
+        public async Task Logger_WriteBigString()
         {
             var directoryPath = GetRandomDirectoryPath("BigString");
             var filePrefix = _file_Prefix + "_bigString";
-            var logService = new LogService(filePrefix, directoryPath);
+            var factory = new LoggerFactory
+            {
+                LogDirectoryPath = directoryPath
+            };
+            var logger = factory.GetLogger(filePrefix);
+
             Debug.WriteLine(directoryPath);
 
             var sb = new StringBuilder();
@@ -80,45 +94,55 @@ namespace Plugin.Logs.Test
                 }
             }).ConfigureAwait(false);
 
-            logService.Log(sb.ToString(), LogLevel.Information);
+            logger.Log(sb.ToString(), LogLevel.Information);
 
-            await logService.FlushAsync().ConfigureAwait(false);
+            await logger.FlushAsync().ConfigureAwait(false);
             var today = DateTime.Today;
             var fileName = Path.Combine(directoryPath, $"{today.ToString("yyyy-MM")}{Path.DirectorySeparatorChar}{filePrefix}_log_{today.ToString("yyyy-MM-dd")}.csv");
             Assert.IsTrue(File.Exists(fileName), $"File doesn't exist {fileName}");
         }
 
         [TestMethod]
-        public async Task LogService_LogErrorAsync()
+        public async Task Logger_LogErrorAsync()
         {
             var directoryPath = GetRandomDirectoryPath("LogError");
             var filePrefix = _file_Prefix + "_LogError";
-            var logService = new LogService(filePrefix, directoryPath);
+            var factory = new LoggerFactory
+            {
+                LogDirectoryPath = directoryPath
+            };
+            var logger = factory.GetLogger(filePrefix);
+
             Debug.WriteLine(directoryPath);
             var inner = new ArgumentOutOfRangeException("out of range mother fucker");
-            logService.Log(new ArgumentNullException("log error test", inner), LogLevel.Error);
-            await logService.FlushAsync();
+            logger.Log(new ArgumentNullException("log error test", inner), LogLevel.Error);
+            await logger.FlushAsync();
             var today = DateTime.Now;
             Assert.IsTrue(File.Exists(Path.Combine(directoryPath, $"{today.ToString("yyyy-MM")}{Path.DirectorySeparatorChar}{filePrefix}_log_{today.ToString("yyyy-MM-dd")}.csv")));
             Assert.IsTrue(File.Exists(Path.Combine(directoryPath, $"{today.ToString("yyyy-MM")}{Path.DirectorySeparatorChar}{filePrefix}_error_{today.ToString("yyyy-MM-dd")}.csv")));
         }
 
         [TestMethod]
-        public async Task LogService_Purge()
+        public async Task Logger_Purge()
         {
             var directoryPath = GetRandomDirectoryPath("Purge");
             var filePrefix = _file_Prefix + "_Purge";
 
             uint dayTokeep = 30;
             var dayToTests = 5;
+            var factory = new LoggerFactory
+            {
+                LogDirectoryPath = directoryPath,
+                NbDaysToKeep = dayTokeep,
+            };
+            var logger = factory.GetLogger(filePrefix);
 
-            var logService = new LogService(filePrefix, directoryPath, dayTokeep);
             var today = DateTime.Now;
             Debug.WriteLine(directoryPath);
 
             var pastMonth = Path.Combine(directoryPath, today.AddMonths(-1).ToString("yyyy-MM"));
-            logService.Log("Test");
-            await logService.FlushAsync();
+            logger.Log("Test");
+            await logger.FlushAsync();
 
             Directory.Exists(Path.Combine(directoryPath, today.ToString("yyyy-MM")));
 
@@ -145,7 +169,7 @@ namespace Plugin.Logs.Test
                 }
             }
 
-            await logService.PurgeOldDaysAsync().ConfigureAwait(false);
+            await logger.PurgeOldDaysAsync().ConfigureAwait(false);
 
             var minDate = today.AddDays(-1 * dayTokeep);
 

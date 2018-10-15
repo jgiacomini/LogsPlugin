@@ -7,16 +7,8 @@ namespace Plugin.Logs
     /// <summary>
     /// Represent a Log service
     /// </summary>
-    public interface ILogService
+    public interface ILogger
     {
-        /// <summary>
-        /// Gets or sets the nb month to keep.
-        /// </summary>
-        /// <value>
-        /// The nb month to keep.
-        /// </value>
-        uint NbDaysToKeep { get; }
-
         /// <summary>
         /// Logs the specified message.
         /// </summary>

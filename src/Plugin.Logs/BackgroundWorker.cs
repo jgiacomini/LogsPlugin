@@ -10,7 +10,7 @@ namespace Plugin.Logs
     /// <summary>
     /// Manage the main loop to log data
     /// </summary>
-    internal class ThreadLogger
+    internal class BackgroundWorker
     {
         #region Fields
 
@@ -22,7 +22,7 @@ namespace Plugin.Logs
         /// <summary>
         /// The instance
         /// </summary>
-        private static volatile ThreadLogger _instance;
+        private static volatile BackgroundWorker _instance;
 
         /// <summary>
         /// The is alive
@@ -36,9 +36,9 @@ namespace Plugin.Logs
         #endregion
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="ThreadLogger"/> class.
+        /// Initializes a new instance of the <see cref="Worker"/> class.
         /// </summary>
-        private ThreadLogger()
+        private BackgroundWorker()
         {
             Task.Run(() =>
             {
@@ -46,7 +46,7 @@ namespace Plugin.Logs
             });
         }
 
-        public static ThreadLogger Instance
+        public static BackgroundWorker Instance
         {
             get
             {
@@ -56,7 +56,7 @@ namespace Plugin.Logs
                     {
                         if (_instance == null)
                         {
-                            _instance = new ThreadLogger();
+                            _instance = new BackgroundWorker();
                         }
                     }
                 }
@@ -77,25 +77,11 @@ namespace Plugin.Logs
         }
 
         /// <summary>
-        /// Gets a value indicating whether this instance is alive.
-        /// </summary>
-        /// <value>
-        ///   <c>true</c> if this instance is alive; otherwise, <c>false</c>.
-        /// </value>
-        internal bool IsAlive
-        {
-            get
-            {
-                return _isAlive;
-            }
-        }
-
-        /// <summary>
         /// Threads the loop.
         /// </summary>
         private async void MainLoop()
         {
-            while (IsAlive)
+            while (true)
             {
                 await Task.Delay(200);
                 await FlushAsync();
@@ -114,7 +100,7 @@ namespace Plugin.Logs
                 {
                     try
                     {
-                        await dataToLog.LogWritterService.WriteLogAsync(dataToLog);
+                        await dataToLog.Listener.WriteLogAsync(dataToLog);
                     }
                     catch (Exception ex)
                     {
@@ -130,10 +116,10 @@ namespace Plugin.Logs
         /// </summary>
         /// <param name="data">The data.</param>
         /// <param name="logLevel">The log level.</param>
-        /// <param name="logWritterService">The log writter service.</param>
-        internal void AddDataToLog(string data, LogLevel logLevel, ILogWriterService logWritterService)
+        /// <param name="logListener">The listener.</param>
+        internal void AddDataToLog(string data, LogLevel logLevel, ILogListener logListener)
         {
-            var dataToLog = new DataToLog(data, logLevel, logWritterService);
+            var dataToLog = new DataToLog(data, logLevel, logListener);
             _queued.Enqueue(dataToLog);
         }
     }

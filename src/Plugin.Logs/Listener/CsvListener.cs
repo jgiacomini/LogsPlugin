@@ -7,7 +7,7 @@ using Plugin.Logs.Model;
 
 namespace Plugin.Logs.Writer
 {
-    public class LogWriterService : ILogWriterService
+    public class CsvListener : ILogListener
     {
         #region Fields
 
@@ -23,7 +23,7 @@ namespace Plugin.Logs.Writer
 
         #endregion
 
-        public LogWriterService(string fileName, string logDirectoryPath)
+        public CsvListener(string fileName, string logDirectoryPath)
         {
             _fileName = fileName;
             _logDirectoryPath = logDirectoryPath;
@@ -44,7 +44,7 @@ namespace Plugin.Logs.Writer
                 directory.Create();
             }
 
-            using (FileStream fs = new FileStream(logFilePath, FileMode.Append, FileAccess.Write))
+            using (var fs = new FileStream(logFilePath, FileMode.Append, FileAccess.Write))
             {
                 using (StreamWriter sw = new StreamWriter(fs, Encoding.UTF8))
                 {
@@ -93,7 +93,7 @@ namespace Plugin.Logs.Writer
             {
                 try
                 {
-                    InternalPurgeAllDays(nbDaysToKeep);
+                    PurgeAllDays(nbDaysToKeep);
                 }
                 catch (Exception ex)
                 {
@@ -106,7 +106,7 @@ namespace Plugin.Logs.Writer
         /// Internals the purge all days.
         /// </summary>
         /// <param name="nbDaysToKeep">Nb days to keep.</param>
-        private void InternalPurgeAllDays(uint nbDaysToKeep)
+        private void PurgeAllDays(uint nbDaysToKeep)
         {
             var directories = Directory.GetDirectories(_logDirectoryPath);
             var minDate = DateTime.Today.AddDays(-1 * nbDaysToKeep);
