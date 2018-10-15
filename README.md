@@ -8,7 +8,7 @@ using Plugin.Logs;
 
 LoggerFactory.LogDirectoryPath = "C:\logs\";
 
-var logService = LoggerFactory.GetLoggger("Log");
+var logger = LoggerFactory.GetLoggger("Log");
 
 //Log a message 
 logger.Log("Message");
