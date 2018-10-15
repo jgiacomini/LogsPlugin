@@ -25,14 +25,9 @@ namespace Plugin.Logs
         private static volatile BackgroundWorker _instance;
 
         /// <summary>
-        /// The is alive
-        /// </summary>
-        private readonly bool _isAlive = true;
-
-        /// <summary>
         /// The _queued
         /// </summary>
-        private ConcurrentQueue<DataToLog> _queued = new ConcurrentQueue<DataToLog>();
+        private ConcurrentQueue<LogEvent> _queue = new ConcurrentQueue<LogEvent>();
         #endregion
 
         /// <summary>
@@ -94,9 +89,9 @@ namespace Plugin.Logs
         /// <returns>return a task</returns>
         internal async Task FlushAsync()
         {
-            while (!_queued.IsEmpty)
+            while (!_queue.IsEmpty)
             {
-                if (_queued.TryDequeue(out DataToLog dataToLog))
+                if (_queue.TryDequeue(out LogEvent dataToLog))
                 {
                     try
                     {
@@ -104,7 +99,7 @@ namespace Plugin.Logs
                     }
                     catch (Exception ex)
                     {
-                        _queued.Enqueue(dataToLog);
+                        _queue.Enqueue(dataToLog);
                         Debug.WriteLine(ex.Message);
                     }
                 }
@@ -119,8 +114,8 @@ namespace Plugin.Logs
         /// <param name="logListener">The listener.</param>
         internal void AddDataToLog(string data, LogLevel logLevel, ILogListener logListener)
         {
-            var dataToLog = new DataToLog(data, logLevel, logListener);
-            _queued.Enqueue(dataToLog);
+            var dataToLog = new LogEvent(data, logLevel, logListener);
+            _queue.Enqueue(dataToLog);
         }
     }
 }

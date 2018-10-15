@@ -3,22 +3,22 @@ using System;
 namespace Plugin.Logs.Model
 {
     /// <summary>
-    /// The data to log
+    /// The event to log
     /// </summary>
-    public class DataToLog
+    public class LogEvent
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="DataToLog"/> class.
+        /// Initializes a new instance of the <see cref="LogEvent"/> class.
         /// </summary>
         /// <param name="data">The data.</param>
         /// <param name="logLevel">The log level.</param>
-        /// <param name="logWritterService">The log writter service.</param>
-        public DataToLog(string data, LogLevel logLevel, ILogListener logWritterService)
+        /// <param name="listener">The log writter service.</param>
+        internal LogEvent(string data, LogLevel logLevel, ILogListener listener)
         {
             Data = data;
             When = DateTime.Now;
             Level = logLevel;
-            Listener = logWritterService;
+            Listener = listener;
         }
 
         /// <summary>

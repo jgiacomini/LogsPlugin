@@ -35,7 +35,7 @@ namespace Plugin.Logs.Writer
         /// <returns>The in file async.</returns>
         /// <param name="logFilePath">Log file path.</param>
         /// <param name="dataToLog">Data to log.</param>
-        private async Task WriteInFileAsync(string logFilePath, DataToLog dataToLog)
+        private async Task WriteInFileAsync(string logFilePath, LogEvent dataToLog)
         {
             var directory = new FileInfo(logFilePath).Directory;
 
@@ -54,7 +54,7 @@ namespace Plugin.Logs.Writer
         }
 
         /// <inheritdoc />
-        public async Task WriteLogAsync(DataToLog dataToLog)
+        public async Task WriteLogAsync(LogEvent dataToLog)
         {
             DateTime today = DateTime.Today;
             string logType = "log";
@@ -77,7 +77,7 @@ namespace Plugin.Logs.Writer
         /// </summary>
         /// <param name="dataToLog">The data to log.</param>
         /// <returns>return a string</returns>
-        private string GenerateStringToWrite(DataToLog dataToLog)
+        private string GenerateStringToWrite(LogEvent dataToLog)
         {
             string level = dataToLog.Level.ToString().ToUpperInvariant().PadRight(11);
 

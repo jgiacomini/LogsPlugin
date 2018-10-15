@@ -21,6 +21,6 @@ namespace Plugin.Logs.Writer
         /// </summary>
         /// <param name="dataToLog">The data to log.</param>
         /// <returns>return a task</returns>
-        Task WriteLogAsync(DataToLog dataToLog);
+        Task WriteLogAsync(LogEvent dataToLog);
     }
 }
