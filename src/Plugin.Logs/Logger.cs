@@ -31,12 +31,6 @@ namespace Plugin.Logs
         }
 
         /// <inheritdoc />
-        public void Log(string message, LogLevel logLevel = LogLevel.Information)
-        {
-            BackgroundWorker.Instance.AddDataToLog(message, logLevel, _logListener);
-        }
-
-        /// <inheritdoc />
         public void Log(Exception exception, LogLevel logLevel = LogLevel.Error)
         {
             BackgroundWorker.Instance.AddDataToLog(exception.ToFormattedString(), logLevel, _logListener);
@@ -58,6 +52,42 @@ namespace Plugin.Logs
         public System.Threading.Tasks.Task PurgeOldDaysAsync()
         {
             return _logListener.PurgeOldDaysAsync(_nbDaysToKeep);
+        }
+
+        /// <inheritdoc />
+        public void Info(string message)
+        {
+            BackgroundWorker.Instance.AddDataToLog(message, LogLevel.Information, _logListener);
+        }
+
+        /// <inheritdoc />
+        public void Trace(string message)
+        {
+            BackgroundWorker.Instance.AddDataToLog(message, LogLevel.Trace, _logListener);
+        }
+
+        /// <inheritdoc />
+        public void Warning(string message)
+        {
+            BackgroundWorker.Instance.AddDataToLog(message, LogLevel.Warning, _logListener);
+        }
+
+        /// <inheritdoc />
+        public void Critical(string message)
+        {
+            BackgroundWorker.Instance.AddDataToLog(message, LogLevel.Critical, _logListener);
+        }
+
+        /// <inheritdoc />
+        public void Debug(string message)
+        {
+            BackgroundWorker.Instance.AddDataToLog(message, LogLevel.Debug, _logListener);
+        }
+
+        /// <inheritdoc />
+        public void Error(string message)
+        {
+            BackgroundWorker.Instance.AddDataToLog(message, LogLevel.Error, _logListener);
         }
     }
 }

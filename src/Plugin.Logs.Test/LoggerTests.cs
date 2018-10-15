@@ -34,7 +34,7 @@ namespace Plugin.Logs.Test
             };
             var logger = factory.GetLogger(filePrefix);
             Debug.WriteLine(directoryPath);
-            logger.Log("log information test", LogLevel.Information);
+            logger.Info("log information test");
 
             await logger.FlushAsync();
             var today = DateTime.Now;
@@ -55,7 +55,7 @@ namespace Plugin.Logs.Test
             var logger = factory.GetLogger(filePrefix);
             Debug.WriteLine(directoryPath);
 
-            logger.Log("log information test_", LogLevel.Information);
+            logger.Info("log information test_");
             await logger.FlushAsync();
             var today = DateTime.Today;
             var fileName = Path.Combine(directoryPath, Path.Combine($"{today.ToString("yyyy-MM")}", $"{filePrefix}_log_{today.ToString("yyyy-MM-dd")}.csv"));
@@ -94,7 +94,7 @@ namespace Plugin.Logs.Test
                 }
             }).ConfigureAwait(false);
 
-            logger.Log(sb.ToString(), LogLevel.Information);
+            logger.Info(sb.ToString());
 
             await logger.FlushAsync().ConfigureAwait(false);
             var today = DateTime.Today;
@@ -141,7 +141,7 @@ namespace Plugin.Logs.Test
             Debug.WriteLine(directoryPath);
 
             var pastMonth = Path.Combine(directoryPath, today.AddMonths(-1).ToString("yyyy-MM"));
-            logger.Log("Test");
+            logger.Warning("Test");
             await logger.FlushAsync();
 
             Directory.Exists(Path.Combine(directoryPath, today.ToString("yyyy-MM")));

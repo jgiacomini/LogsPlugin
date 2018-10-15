@@ -13,8 +13,37 @@ namespace Plugin.Logs
         /// Logs the specified message.
         /// </summary>
         /// <param name="message">The message.</param>
-        /// <param name="logLevel">The log level.</param>
-        void Log(string message, LogLevel logLevel = LogLevel.Information);
+        void Info(string message);
+
+        /// <summary>
+        /// Logs the specified message.
+        /// </summary>
+        /// <param name="message">The message.</param>
+        void Trace(string message);
+
+        /// <summary>
+        /// Logs the specified message.
+        /// </summary>
+        /// <param name="message">The message.</param>
+        void Warning(string message);
+
+        /// <summary>
+        /// Logs the specified message.
+        /// </summary>
+        /// <param name="message">The message.</param>
+        void Critical(string message);
+
+        /// <summary>
+        /// Logs the specified message.
+        /// </summary>
+        /// <param name="message">The message.</param>
+        void Debug(string message);
+
+        /// <summary>
+        /// Logs the specified message.
+        /// </summary>
+        /// <param name="message">The message.</param>
+        void Error(string message);
 
         /// <summary>
         /// Logs the specified exception.

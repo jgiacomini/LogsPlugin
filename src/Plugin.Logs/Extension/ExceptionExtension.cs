@@ -9,9 +9,9 @@ namespace Plugin.Logs.Extension
     public static class ExceptionExtension
     {
         /// <summary>
-        /// Creates the exception string.
+        /// Format exception to a string.
         /// </summary>
-        /// <param name="e">The e.</param>
+        /// <param name="e">The <see cref="Exception"/>.</param>
         /// <param name="message">The message.</param>
         /// <returns>return exception string formatted</returns>
         public static string ToFormattedString(this Exception e, string message = null)
