@@ -10,8 +10,6 @@ ILoggerFactory loggerFactory = new LoggerFactory
    LogDirectoryPath = @"C:\logs\"
 };
 
-factory.LogDirectoryPath = "C:\logs\";
-
 var logger = loggerFactory.GetLoggger("Log");
 
 //Log a message 
