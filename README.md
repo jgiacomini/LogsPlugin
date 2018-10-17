@@ -5,10 +5,14 @@
 Plugin to logs on .Net platforms.  
 ```cs
 using Plugin.Logs;
+ILoggerFactory loggerFactory = new LoggerFactory
+{
+   LogDirectoryPath = @"C:\logs\"
+};
 
-LoggerFactory.LogDirectoryPath = "C:\logs\";
+factory.LogDirectoryPath = "C:\logs\";
 
-var logger = LoggerFactory.GetLoggger("Log");
+var logger = loggerFactory.GetLoggger("Log");
 
 //Log a message 
 logger.Info("Message");
